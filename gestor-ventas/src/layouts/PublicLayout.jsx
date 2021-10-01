@@ -1,6 +1,6 @@
+import React from 'react';
 import Footer from 'components/Footer';
 import Navbar from 'components/Navbar';
-import React from 'react'
 
 const PublicLayout = ({children}) => {
     return (
@@ -9,7 +9,7 @@ const PublicLayout = ({children}) => {
             <main className='h-full overflow-y-scroll'>{children}</main>
             <Footer/>
         </div>
-    )
-}
+    );
+};
 
 export default PublicLayout;

@@ -14,6 +14,7 @@ import UsuariosListar from 'pages/UsuariosListar';
 import VentasActualizar from 'pages/VentasActualizar';
 import VentasCrear from 'pages/VentasCrear';
 import Inside from 'pages/Inside';
+import VentasListar from 'pages/VentasListar';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
               </Switch>
             </AuthLayout>
           </Route>
-          <Route path={['/Inside', '/ProductosActualizar', '/ProductosCrear','/ProductosListar', '/UsuariosActualziar', '/UsuariosListar', 'VentasActualizar', 'VentasCrear', 'VentasListar']}>
+          <Route path={['/Inside', '/ProductosActualizar', '/ProductosCrear','/ProductosListar', '/UsuariosActualizar', '/UsuariosListar', '/VentasActualizar', '/VentasCrear', '/VentasListar']}>
             <PrivateLayout>
               <Switch>
                 <Route path='/Inside'>
@@ -56,11 +57,11 @@ function App() {
                 <Route path='/VentasActualizar'>
                   <VentasActualizar/>
                 </Route>
+                <Route path='/VentasListar'>
+                  <VentasListar/>
+                </Route>
                 <Route path='/VentasCrear'>
                   <VentasCrear/>
-                </Route>
-                <Route path='/VentasActualizar'>
-                  <VentasActualizar/>
                 </Route>
               </Switch>
             </PrivateLayout>

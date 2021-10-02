@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav className='bg-green-400'>
-            <ul className='flex w-full justify-between p-2'>
-                <i className='fas fa-clipboard-check'></i>
+        <nav className='bg-gray-300'>
+            <ul className='flex w-full justify-evenly  p-1 flex items-center'>
                 <li>Navegación1</li>
                 <li>Navegación2</li>
-                <li className='px-3'>
-                    <Link to='/login'>
-                        <button className='bg-blue-700 p-1 text-white rounded-md hover:bg-blue-900'>
-                            Iniciar sesión
+                <li className='px-1'>
+                    <Link to='/Index'>
+                        <button className='bg-red-700 p-1 text-white rounded-md hover:bg-red-900'>
+                            Logout
                         </button>
                     </Link>
                 </li>

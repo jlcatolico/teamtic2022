@@ -6,7 +6,7 @@ import { faBoxes, faHome, faSearchDollar, faUsers } from '@fortawesome/free-soli
 const Sidebar = () => {
   return (
     <nav className="w-auto border border-gray-700 bg-gray-700 h-full p-2 justify">
-      <ul className="flex flex-col h-full justify-start md:justify-around">
+      <ul className="flex flex-col h-full justify-start justify-around">
         <li className="px-3 m-3">
           <Link to="/Inside">
             <a className="text-white p-2 rounded bg-red-400 flex items-stretch">

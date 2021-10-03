@@ -4,10 +4,11 @@ import Navbar from 'components/Navbar';
 
 const PublicLayout = ({children}) => {
     return (
-        <div className='flex flex-col justify-between h-screen'>
-            <main className='h-full overflow-y-scroll'>{children}</main>
-            <Footer/>
-        </div>
+        <div className='flex flex-col h-screen w-screen justify-between'>
+            <Navbar/>
+            <main className="flex w-full h-full overflow-y-scroll p-2">{children}</main>
+            <Footer />
+      </div>
     );
 };
 

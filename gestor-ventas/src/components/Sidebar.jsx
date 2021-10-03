@@ -40,7 +40,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="px-3 m-3">
-          <Link to="/VentasListar">
+          <Link to="/VentasCrear">
             <a className="text-white p-2 rounded bg-red-400 flex items-stretch">
               <FontAwesomeIcon icon={faCashRegister} className='m-1'/>
               Crear venta

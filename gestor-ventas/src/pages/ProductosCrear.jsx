@@ -4,7 +4,7 @@ const ProductosCrear = () => {
     return (
         <>
             
-            <div className="mt-10 sm:mt-0 h-full w-2/4">
+            <div className="mt-10 sm:mt-0 h-full w-2/4giy">
                 <div className="grid-rows-2 grid-cols-1 w-screen">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
@@ -22,7 +22,8 @@ const ProductosCrear = () => {
                                                 name="idproducto"
                                                 id="idproducto"
                                                 autoComplete="given-name"
-                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                                                placeholder='Id. producto'
+                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
                                             />
                                         </div><br/>
 
@@ -35,7 +36,8 @@ const ProductosCrear = () => {
                                                 name="descricpcion"
                                                 id="descripcion"
                                                 autoComplete="family-name"
-                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                                                placeholder='Nombre producto'
+                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
                                             />
                                         </div>
 
@@ -48,7 +50,8 @@ const ProductosCrear = () => {
                                                 name="valor-unitario"
                                                 id="valor-unitario"
                                                 autoComplete="valoruni"
-                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
+                                                placeholder='Valor producto'
+                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
                                             />
                                         </div>
 

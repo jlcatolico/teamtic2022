@@ -29,8 +29,7 @@ const Navbar = () => {
                         </div>
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex space-x-4">
-                                <a href="#" className="bg-gray-800 text-white border-solid border-2 border-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-green-500 hover:text-white hover:font-bold" aria-current="page">OFERTAS</a>
-
+                                <a href="#" className="bg-gray-800 text-white border-solid border-2 border-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-green-500 hover:text-white hover:font-bold" aria-current="page">Ofertas</a>
                                 <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white hover:font-bold px-3 py-2 rounded-md text-sm font-medium">Conocenos</a>
 
                                 <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white hover:font-bold px-3 py-2 rounded-md text-sm font-medium">Noticias</a>
@@ -39,11 +38,13 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to='/Login'>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <a href="#" className="bg-gray-800 text-white border-solid border-2 border-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-800 hover:text-white hover:font-bold" aria-current="page">SIGN IN</a>
+                            <a href="#" className="bg-gray-800 text-white border-solid border-2 border-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-800 hover:text-white hover:font-bold" aria-current="page">Login</a>
                         </button>
                     </div>
+                    </Link>
                 </div>
             </div>
 

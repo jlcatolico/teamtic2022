@@ -9,10 +9,10 @@ const Registro = () => {
                 <div className="lg:flex w-1/2 hidden bg-gray-800 bg-no-repeat bg-cover relative items-center" style={{backgroundImage: "https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"}}>
                     <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
                     <div className="w-full px-24 z-10">
-                        <h1 className="text-5xl border-gray-300 font-bold text-left tracking-wide">GESTOR DE VENTAS</h1>
-                        <p className="text-3xl my-4">Sprint2 - MISION TIC 2021</p>
+                    <h1 className="text-5xl border-gray-300 font-bold text-left tracking-wide">Gestor de Ventas</h1>
+                        <p className="text-3xl my-4">Sprint2 - MinTic 2022</p>
                     </div>
-                    <div className="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4 ">
+                    <div className="bottom-0 absolute p-2 text-center right-0 left-0 flex justify-center space-x-4 ">
                         <a href="" className="text-white ml-1">
                             <i className="fab fa-facebook-f"></i>
                         </a>
@@ -28,10 +28,10 @@ const Registro = () => {
                     <div className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
                         <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
                     </div>
-                    <div className="w-full pt-6 pb-1 z-20">
-                        <h1 className="my-6">
+                    <div className="w-full pt-2 pb-1 z-20">
+                        <h1 className="my-3">
                             <img className="w-auto h-28 inline-flex" src={DesarrolloIT_completo} alt="GESTOR DE VENTAS"/>
-                            <p className="text-3xl mt-6 mb-1 text-black">Register with</p>
+                            <p className="text-3xl mt-3 mb-1 text-black">Sign in with</p>
                         </h1>
                         <div className="py-6 space-x-2">
                             <a href="">
@@ -45,7 +45,7 @@ const Registro = () => {
                             </a>
                         </div>
                         <p className="text-gray-400">
-                            or use your email
+                            Or use your email
                         </p>
                         <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
                             <div className="pb-2 pt-4">

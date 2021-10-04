@@ -8,10 +8,10 @@ const Login = () => {
                 <div className="lg:flex w-1/2 hidden bg-gray-800 bg-no-repeat bg-cover relative items-center" style={{backgroundImage: "https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80"}}>
                     <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
                     <div className="w-full px-24 z-10">
-                        <h1 className="text-5xl border-gray-300 font-bold text-left tracking-wide">GESTOR DE VENTAS</h1>
-                        <p className="text-3xl my-4">Sprint2 - MISION TIC 2021</p>
+                        <h1 className="text-5xl border-gray-300 font-bold text-left tracking-wide">Gestor de Ventas</h1>
+                        <p className="text-3xl my-4">Sprint2 - MinTic 2022</p>
                     </div>
-                    <div className="bottom-0 absolute p-4 text-center right-0 left-0 flex justify-center space-x-4 ">
+                    <div className="bottom-0 absolute p-2 text-center right-0 left-0 flex justify-center space-x-4 ">
                         <a href="" className="text-white ml-1">
                             <i className="fab fa-facebook-f"></i>
                         </a>
@@ -27,10 +27,10 @@ const Login = () => {
                     <div className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
                         <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
                     </div>
-                    <div className="w-full pt-6 pb-1 z-20">
-                        <h1 className="my-6">
+                    <div className="w-full pt-2 pb-1 z-20">
+                        <h1 className="my-3">
                             <img className="w-auto h-28 inline-flex" src={DesarrolloIT_completo} alt="GESTOR DE VENTAS"/>
-                            <p className="text-3xl mt-6 mb-1 text-black">Sign in with</p>
+                            <p className="text-3xl mt-3 mb-1 text-black">Login with</p>
                         </h1>
                         <div className="py-6 space-x-2">
                             <a href="">
@@ -44,22 +44,28 @@ const Login = () => {
                             </a>
                         </div>
                         <p className="text-gray-400">
-                            or use email your account
+                            Or use email your account
                         </p>
                         <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
                             <div className="pb-2 pt-4">
-                                <input type="email" name="email" id="email" placeholder="Email" className="block w-full p-4 text-lg rounded-sm bg-black"/>
+                                <input type="email" name="email" id="email" placeholder="Email" className="block w-full p-2 text-lg rounded bg-black"/>
                             </div>
                             <div className="pb-2 pt-4">
-                                <input className="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Password"/>
+                                <input className="block w-full p-2 text-lg rounded bg-black" type="password" name="password" id="password" placeholder="Password"/>
                             </div>
                             <div className="text-right text-gray-400 hover:underline hover:text-gray-900">
                                 <a href="#">Forgot your password?</a>
                             </div>
-                            <div className="px-4 pb-2 pt-4">
-                                <button className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">sign in</button>
-                            </div>
-
+                            <Link to='/Inside'>
+                                <div className="px-4 pb-2 pt-4">
+                                    <button className="block w-full p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none">Login</button>
+                                </div>
+                            </Link>
+                            <Link to='/Registro'>
+                                <div className="px-4 pb-2 pt-4">
+                                    <button className="block w-full p-2 text-lg rounded-full bg-green-600 hover:bg-green-700 focus:outline-none">Registro</button>
+                                </div>
+                            </Link>
                             <div className="p-4 text-center right-0 left-0 flex justify-center space-x-4 mt-16 lg:hidden ">
                                 <a href="#">
                                     <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>

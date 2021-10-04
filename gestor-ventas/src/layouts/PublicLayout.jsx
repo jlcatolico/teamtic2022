@@ -6,7 +6,7 @@ const PublicLayout = ({children}) => {
     return (
         <div className='flex flex-col h-screen w-screen justify-between'>
             <Navbar/>
-            <main className="flex w-full h-full overflow-y-scroll p-2">{children}</main>
+            <main className="flex w-full h-full">{children}</main>
             <Footer />
         </div>
     );

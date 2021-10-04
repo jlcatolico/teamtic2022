@@ -8,7 +8,7 @@ const PublicLayout = ({children}) => {
             <Navbar/>
             <main className="flex w-full h-full overflow-y-scroll p-2">{children}</main>
             <Footer />
-      </div>
+        </div>
     );
 };
 

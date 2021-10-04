@@ -64,7 +64,7 @@ const VentasListar = () => {
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3">
                 <h1>Búsqueda</h1>
               <form action="#">
-                <div className="my-6 row flex flex-row flex justify-evenly flex items-center">
+                <div className="my-6 row flex flex-row flex-justify-evenly flex-items-center">
                   <label htmlFor="id_venta" className="block text-sm font-medium text-gray-700">
                     Id. Venta
                   </label>

@@ -1,4 +1,3 @@
-import AdicionarProducto from 'components/AdicionarProducto';
 import React from 'react'
 
 const productos = [
@@ -125,12 +124,12 @@ const VentasCrear = () => {
 
                             <div class="md:flex mb-2">
 
-                                <div class="md:w-1/6 px-3 md:mb-1">
+                                <div class="md:w-1/6 px-2 md:mb-1">
                                     <label class="uppercase tracking-wide text-gray-700  text-xs mb-2" htmlFor="">Codigo</label>
                                     <input class=" w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="text" placeholder="00032" />
                                 </div>
 
-                                <div class="md:w-2/6 px-3 md:mb-1">
+                                <div class="md:w-4/6 px-3 md:mb-1">
                                     <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Descripcion</label>
                                     <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="text" placeholder="Licuadora Oster 5000" />
                                 </div>
@@ -146,10 +145,15 @@ const VentasCrear = () => {
                                     <input class="text-right w-full  bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="number" placeholder="370.000" />
                                 </div>
 
+                                <div class="md:w-1/6 px-3 md:mb-1">
+                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Precio Total</label>
+                                    <input class="text-right w-full  bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="number" placeholder="740.000" />
+                                </div>
+
 
                                 <div class="md:w-1/6 px-2 py-6 md:mb-1">
                                     <button type="submit"
-                                        className="inline-flex justify-center py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        className="w-full inline-flex justify-center py-1 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         + Adicionar
                                     </button>
                                 </div>
@@ -164,9 +168,9 @@ const VentasCrear = () => {
                                         <tr>
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Codigo</th>
                                             <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Descripcion</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Cantidad</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Unitario</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Total</th>
+                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Cantidad</th>
+                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Unitario</th>
+                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Total</th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">

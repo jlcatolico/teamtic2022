@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const sale = [
     {
@@ -157,9 +158,11 @@ const VentasListar = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        <Link to='/VentasActualizar'>
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
                           Editar
                         </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}

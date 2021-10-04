@@ -4,7 +4,7 @@ const ProductosCrear = () => {
     return (
         <>
             
-            <div className="mt-10 sm:mt-0 h-full w-2/4giy">
+            <div className="mt-10 sm:mt-0 h-full w-1">
                 <div className="grid-rows-2 grid-cols-1 w-screen">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">
@@ -22,8 +22,7 @@ const ProductosCrear = () => {
                                                 name="idproducto"
                                                 id="idproducto"
                                                 autoComplete="given-name"
-                                                placeholder='Id. producto'
-                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                             />
                                         </div><br/>
 
@@ -36,24 +35,22 @@ const ProductosCrear = () => {
                                                 name="descricpcion"
                                                 id="descripcion"
                                                 autoComplete="family-name"
-                                                placeholder='Nombre producto'
-                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                             />
-                                        </div>
+                                        </div><br/>
 
-                                        <div className="col-span-6 sm:col-span-4">
-                                            <label htmlFor="valor-unitario" className="block text-sm font-medium text-gray-700">
+                                        <div className="col-span-6 sm:col-span-3">
+                                            <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">
                                                 Valor Unitario
                                             </label>
                                             <input
                                                 type="number"
                                                 name="valor-unitario"
                                                 id="valor-unitario"
-                                                autoComplete="valoruni"
-                                                placeholder='Valor producto'
-                                                className="mt-1 block w-full p-1 px-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+                                                autoComplete="family-name"
+                                                className="mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"
                                             />
-                                        </div>
+                                        </div><br/>
 
                                         <div className="col-span-6 sm:col-span-3">
                                             <label htmlFor="estado" className="block text-sm font-medium text-gray-700">

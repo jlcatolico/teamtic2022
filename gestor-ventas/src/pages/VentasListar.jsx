@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const sale = [
     {
@@ -63,7 +64,7 @@ const VentasListar = () => {
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3">
                 <h1>Búsqueda</h1>
               <form action="#">
-                <div className="my-6 row flex flex-row flex justify-evenly flex items-center">
+                <div className="my-6 row flex flex-row flex-justify-evenly flex-items-center">
                   <label htmlFor="id_venta" className="block text-sm font-medium text-gray-700">
                     Id. Venta
                   </label>
@@ -157,9 +158,11 @@ const VentasListar = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        <Link to='/VentasActualizar'>
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
                           Editar
                         </a>
+                        </Link>
                       </td>
                     </tr>
                   ))}

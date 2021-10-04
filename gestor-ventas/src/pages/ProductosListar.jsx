@@ -1,15 +1,33 @@
 import React from 'react'
 
-const sale = [
+const producto = [
     {
-        id_venta: 202110030001,
-        nombre_cliente: 'Gelatina x Caja',
-        valor_venta:2500 ,
+        id_producto: '00001',
+        descripcion: 'Gelatina x Caja',
+        precio_unitario: '2.500',
         estado: 'Disponible',    
     },
+    {
+      id_producto: '00034',
+      descripcion: 'Televisor lg 42 Pulgadas',
+      precio_unitario: '2.300.000',
+      estado: 'Disponible',    
+    },
+    {
+      id_producto: '00012',
+      descripcion: 'Mini componente sony 300w',
+      precio_unitario: '600.000',
+      estado: 'Disponible',    
+    },
+    {
+      id_producto: '00054',
+      descripcion: 'Lavadora LG 30 libras',
+      precio_unitario: '3.200.000',
+      estado: 'No disponible',    
+  },
 ];
 
-const VentasListar = () => {
+const ProductosListar = () => {
     return (
       <div className="w-full h-full flex flex-col overflow-hidden">
         <h2 className="text-lg font-medium leading-6 text-gray-900 p-3">
@@ -21,7 +39,7 @@ const VentasListar = () => {
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3">
                 <h1>Búsqueda</h1>
               <form action="#">
-                <div className="my-6 row flex flex-row flex justify-evenly flex items-center">
+                <div className="my-6 row flex flex-row justify-evenly items-center">
                   <label htmlFor="id_producto" className="block text-sm font-medium text-gray-700">
                     Id. Producto
                   </label>
@@ -69,37 +87,27 @@ const VentasListar = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {sale.map((sale) => (
-                    <tr key={sale.id_venta}>
+                  {producto.map((producto) => (
+                    <tr key={producto.id_producto}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">
-                          {sale.id_venta}
+                          {producto.id_producto}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500">
-                          {sale.valor_venta}
+                          {producto.descripcion}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500">
-                          {sale.fecha_venta}
+                          {producto.precio_unitario}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {sale.id_cliente}
+                        {producto.estado}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {sale.nombre_cliente}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {sale.vendedor}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex leading-5 text-sm rounded-sm bg-green-100 text-green-800">
-                          {sale.estado}
-                        </span>
-                      </td>
+                      
                       <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <a href="#" className="text-indigo-600 hover:text-indigo-900">
                           Editar
@@ -155,4 +163,4 @@ const VentasListar = () => {
     );
 }
 
-export default VentasListar;
+export default ProductosListar;

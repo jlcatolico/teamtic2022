@@ -25,12 +25,12 @@ const people = [
 
 const UsuariosListar = () => {
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden">
+    <div className="w-full h-full flex-col overflow-hidden">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <form action="#">
-              <div className="my-6 row flex flex-row flex justify-evenly flex items-center">
+              <div className="my-6 row flex-row flex-justify-evenly flex-items-center">
                 <label
                   htmlFor="correo"
                   className="block text-sm font-medium text-gray-700"

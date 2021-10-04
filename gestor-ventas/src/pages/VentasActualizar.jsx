@@ -227,12 +227,14 @@ const VentasActualizar = () => {
                 </span>
               </div>
 
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-2 mb-10">
+              <div className="px-4 py-3 bg-gray-50 text-right sm:px-2 mb-5">
                 <button type="submit" className="inline-flex justify-center py-1 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Guardar
                 </button>
               </div>
-              
+              <div className="bg-green-400  w-full rounded-md my-3">
+                <p className="p-2 text-center text-white">El registro se actualizó correctamente</p>
+              </div>
             </div>
           </form>
         </div>

@@ -4,7 +4,7 @@ const ProductosCrear = () => {
     return (
         <>
             
-            <div className="mt-10 sm:mt-0 h-full w-1">
+            <div className="mt-10 sm:mt-0 h-full w-1 p-3">
                 <div className="grid-rows-2 grid-cols-1 w-screen">
                 <div className="md:grid md:grid-cols-3 md:gap-6">
                     <div className="mt-5 md:mt-0 md:col-span-2">

@@ -40,10 +40,10 @@ const VentasCrear = () => {
                         <div className="shadow overflow-hidden sm:rounded-md p-3">
                             <div className="-mx-3 md:flex mb-1">
                                 <div className=" md:w-1/6 col-span-6 sm:col-span-3 mb-2 px-3">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700 font-bold mb-2" htmlFor="">
                                         Id Venta
                                     </label>
-                                    <input class="w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-1 px-3 mb-3" id="company" type="text" placeholder="33456" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3 mb-3" id="company" type="text" placeholder="33456" />
                                     <div>
                                     </div>
                                 </div>
@@ -55,19 +55,19 @@ const VentasCrear = () => {
 
                             <div class="-mx-3 md:flex mb-1">
                                 <div class="md:w-1/4 px-3">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs  mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700   mb-2" htmlFor="">
                                         Identificacion
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="102345721" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="102345721" />
                                     <div>
                                     </div>
                                 </div>
 
                                 <div class="md:w-3/4 px-3 mb-6 md:mb-0">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs  mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700   mb-2" htmlFor="">
                                         Nombre
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="ANDRES CAMILO LOPEZ" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="ANDRES CAMILO LOPEZ" />
                                     <div>
                                     </div>
                                 </div>
@@ -75,19 +75,19 @@ const VentasCrear = () => {
 
                             <div class="-mx-3 md:flex mb-5">
                                 <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700  mb-2" htmlFor="">
                                         Direccion
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="CARRERA 10D 33-13 PISO 4" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="CARRERA 10D 33-13 PISO 4" />
                                     <div>
                                     </div>
                                 </div>
 
                                 <div class="md:w-1/2 px-3">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">
                                         Correo Electronico
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="ANDRES.LOPEZ@GMAIL.COM" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="ANDRES.LOPEZ@GMAIL.COM" />
                                     <div>
                                     </div>
                                 </div>
@@ -99,19 +99,19 @@ const VentasCrear = () => {
 
                             <div class="-mx-3 md:flex mb-6">
                                 <div class="md:w-1/6 px-3">
-                                    <label class="uppercase tracking-wide text-gray-700  text-xs mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">
                                         Codigo
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="4055" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="4055" />
                                     <div>
                                     </div>
                                 </div>
 
                                 <div class="md:w-5/6 px-3 mb-6 md:mb-0">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">
                                         Nombre
                                     </label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="DIEGO RAMIREZ" />
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-4 mb-3" id="company" type="text" placeholder="DIEGO RAMIREZ" />
                                     <div>
                                     </div>
                                 </div>
@@ -125,28 +125,28 @@ const VentasCrear = () => {
                             <div class="md:flex mb-2">
 
                                 <div class="md:w-1/6 px-2 md:mb-1">
-                                    <label class="uppercase tracking-wide text-gray-700  text-xs mb-2" htmlFor="">Codigo</label>
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">Codigo</label>
                                     <input class=" w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="text" placeholder="00032" />
                                 </div>
 
                                 <div class="md:w-4/6 px-3 md:mb-1">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Descripcion</label>
-                                    <input class="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="text" placeholder="Licuadora Oster 5000" />
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">Descripcion</label>
+                                    <input class="w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="text" placeholder="Licuadora Oster 5000" />
                                 </div>
 
                                 <div class="md:w-1/6 px-3 md:mb-1">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Cantidad</label>
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">Cantidad</label>
                                     <input class="text-right w-full  bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="number" placeholder="2" />
                                 </div>
 
 
                                 <div class="md:w-1/6 px-3 md:mb-1">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Precio Unitario</label>
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">Precio Unitario</label>
                                     <input class="text-right w-full  bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="number" placeholder="370.000" />
                                 </div>
 
                                 <div class="md:w-1/6 px-3 md:mb-1">
-                                    <label class="uppercase tracking-wide text-gray-700 text-xs mb-2" htmlFor="">Precio Total</label>
+                                    <label class=" tracking-wide text-gray-700 mb-2" htmlFor="">Precio Total</label>
                                     <input class="text-right w-full  bg-gray-50 text-gray-700 border border-gray-200 rounded py-1 px-3" id="company" type="number" placeholder="740.000" />
                                 </div>
 
@@ -166,11 +166,11 @@ const VentasCrear = () => {
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Codigo</th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Descripcion</th>
-                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Cantidad</th>
-                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Unitario</th>
-                                            <th scope="col" className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Precio Total</th>
+                                            <th scope="col" className="px-6 py-3 text-left font-medium text-gray-500 tracking-wider">Codigo</th>
+                                            <th scope="col" className="px-6 py-3 text-left font-medium  text-gray-500 tracking-wider">Descripcion</th>
+                                            <th scope="col" className="px-6 py-3 text-right font-medium text-gray-500 tracking-wider">Cantidad</th>
+                                            <th scope="col" className="px-6 py-3 text-right font-medium text-gray-500 tracking-wider">Precio Unitario</th>
+                                            <th scope="col" className="px-6 py-3 text-right font-medium text-gray-500 tracking-wider">Precio Total</th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">

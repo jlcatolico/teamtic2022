@@ -242,12 +242,10 @@ const VentasCrear = () => {
                     {producto.map((producto) => (
                       <tr key={producto.id_producto}>
                         <td className="spaceTable resultTable">
-                            {producto.id_producto}
-                         
+                          {producto.id_producto}
                         </td>
                         <td className="spaceTable resultTable">
-                            {producto.descripcion}
-                        
+                          {producto.descripcion}
                         </td>
                         <td className="spaceTable resultTable">
                           <div className="flex justify-end">
@@ -271,30 +269,18 @@ const VentasCrear = () => {
               </div>
 
               <div class="md:flex mb-2">
-                <span class="totalVentaT">
-                  Sub Total:{" "}
-                </span>
-                <span class="totalVentaN">
-                  9.600.000
-                </span>
+                <span class="totalVentaT">Sub Total: </span>
+                <span class="totalVentaN">9.600.000</span>
               </div>
 
               <div class="md:flex mb-2">
-                <span class="totalVentaT">
-                  Impuestos:{" "}
-                </span>
-                <span class="totalVentaN">
-                  1.824.000
-                </span>
+                <span class="totalVentaT">Impuestos: </span>
+                <span class="totalVentaN">1.824.000</span>
               </div>
 
               <div class="md:flex mb-2">
-                <span class="totalVentaT">
-                  Total:{" "}
-                </span>
-                <span class="totalVentaN">
-                  11.424.000
-                </span>
+                <span class="totalVentaT">Total: </span>
+                <span class="totalVentaN">11.424.000</span>
               </div>
 
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-2 mb-5">

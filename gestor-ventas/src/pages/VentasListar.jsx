@@ -77,7 +77,7 @@ const VentasListar = () => {
                   className="inputSearch"
                 />
                 <label htmlFor="fecha_venta" className="labelSearch">
-                  Id. Venta
+                  Fecha Venta
                 </label>
                 <input
                   type="date"
@@ -108,10 +108,7 @@ const VentasListar = () => {
                   <option>Entregada</option>
                   <option>Cancelada</option>
                 </select>
-                <button
-                  type="submit"
-                  className="searchButton"
-                >
+                <button type="submit" className="searchButton">
                   Buscar
                 </button>
               </div>
@@ -164,7 +161,7 @@ const VentasListar = () => {
                       {sale.nombre_cliente}
                     </td>
                     <td className="spaceTable resultTable">{sale.vendedor}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="spaceTable">
                       <span className="px-2 inline-flex leading-5 text-sm rounded-sm bg-green-100 text-green-800">
                         {sale.estado}
                       </span>

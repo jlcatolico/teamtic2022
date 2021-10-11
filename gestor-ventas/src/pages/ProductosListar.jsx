@@ -100,26 +100,20 @@ const ProductosListar = () => {
                 {producto.map((producto) => (
                   <tr key={producto.id_producto}>
                     <td className="spaceTable resultTable text-gray-900 font-medium ">
-                        {producto.id_producto}
-                     
+                      {producto.id_producto}
                     </td>
                     <td className="spaceTable resultTable">
-                        {producto.descripcion}
-                      
+                      {producto.descripcion}
                     </td>
                     <td className="spaceTable resultTable">
-                        {producto.precio_unitario}
-                     
+                      {producto.precio_unitario}
                     </td>
                     <td className="spaceTable resultTable">
                       {producto.estado}
                     </td>
 
                     <td className="resultTable spaceTable font-medium">
-                      <a
-                        href="#"
-                        className="actualizarText"
-                      >
+                      <a href="#" className="actualizarText">
                         Editar
                       </a>
                     </td>

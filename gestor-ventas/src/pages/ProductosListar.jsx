@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const producto = [
   {
@@ -113,9 +114,11 @@ const ProductosListar = () => {
                     </td>
 
                     <td className="resultTable spaceTable font-medium">
-                      <a href="#" className="actualizarText">
-                        Editar
-                      </a>
+                      <Link to="/ProductosActualizar">
+                        <a href="#" className="actualizarText">
+                          Actualizar
+                        </a>
+                      </Link>
                     </td>
                   </tr>
                 ))}

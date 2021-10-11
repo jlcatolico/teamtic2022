@@ -35,7 +35,7 @@ const UsuariosListar = () => {
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3">
             <h1>Búsqueda</h1>
             <form action="#">
-              <div className="my-6 row flex flex-row flex justify-evenly flex items-center">
+              <div className="my-6 row flex flex-row justify-evenly items-center">
                 <label htmlFor="correo" className="labelSearch">
                   Correo
                 </label>
@@ -71,10 +71,7 @@ const UsuariosListar = () => {
                   <option>Activo</option>
                   <option>Inactivo</option>
                 </select>
-                <button
-                  type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
+                <button type="submit" className="searchButton">
                   Buscar
                 </button>
               </div>

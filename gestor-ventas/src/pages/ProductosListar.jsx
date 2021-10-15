@@ -1,34 +1,25 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
-const producto = [
-	{
-		id_producto: '00001',
-		descripcion: 'Gelatina x Caja',
-		precio_unitario: '2.500',
-		estado: 'Disponible',
-	},
-	{
-		id_producto: '00034',
-		descripcion: 'Televisor lg 42 Pulgadas',
-		precio_unitario: '2.300.000',
-		estado: 'Disponible',
-	},
-	{
-		id_producto: '00012',
-		descripcion: 'Mini componente sony 300w',
-		precio_unitario: '600.000',
-		estado: 'Disponible',
-	},
-	{
-		id_producto: '00054',
-		descripcion: 'Lavadora LG 30 libras',
-		precio_unitario: '3.200.000',
-		estado: 'No disponible',
-	},
-];
+
+
 
 const ProductosListar = () => {
+
+	const[productos, setProductos] = useState([]);
+
+	useEffect(() => {
+	const options = { method: 'GET', url: 'http://localhost:5000/productos/' };
+
+	axios.request(options).then(function (response) {
+		console.log(response.data);
+		setProductos(response.data)
+	}).catch(function (error) {
+		console.error(error);
+	});}, []);
+
+
 	return (
 		<div className='w-full h-full flex flex-col overflow-hidden'>
 			<h2 className='text-lg font-medium leading-6 text-gray-900 p-3'>Listado de Productos</h2>
@@ -86,7 +77,7 @@ const ProductosListar = () => {
 								</tr>
 							</thead>
 							<tbody className='bg-white divide-y divide-gray-200'>
-								{producto.map((producto) => (
+								{productos.map((producto) => (
 									<tr key={producto.id_producto}>
 										<td className='spaceTable resultTable text-gray-900 font-medium '>{producto.id_producto}</td>
 										<td className='spaceTable resultTable'>{producto.descripcion}</td>

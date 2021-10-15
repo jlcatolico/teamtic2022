@@ -7,18 +7,17 @@ import axios from "axios";
 
 const ProductosListar = () => {
 
-	const[productos, setProductos] = useState([]);
+	const [productos, setProductos] = useState([]);
 
 	useEffect(() => {
-	const options = { method: 'GET', url: 'http://localhost:5000/productos/' };
+		const options = { method: 'GET', url: 'http://localhost:5000/productos/' };
 
-	axios.request(options).then(function (response) {
-		console.log(response.data);
-		setProductos(response.data)
-	}).catch(function (error) {
-		console.error(error);
-	});}, []);
-
+		axios.request(options).then(function (response) {
+			setProductos(response.data)
+		}).catch(function (error) {
+			console.error(error);
+		});
+	}, []);
 
 	return (
 		<div className='w-full h-full flex flex-col overflow-hidden'>

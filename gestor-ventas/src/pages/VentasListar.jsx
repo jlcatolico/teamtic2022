@@ -11,7 +11,6 @@ const VentasListar = () => {
 
 	useEffect(() => {
 		const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
-	
 		axios.request(options).then(function (response) {
 			console.log(response.data);
 			setVentas(response.data)

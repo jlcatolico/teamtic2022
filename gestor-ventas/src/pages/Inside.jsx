@@ -7,7 +7,7 @@ import Maria from 'Media/MARIA.jpg';
 
 const Inside = () => {
 	return (
-		<div className=' w-full h-full bg-gradient-to-br from-gray-200 via-gray-500 to-gray-900'>
+		<div className=' w-full h-full bg-gradient-to-br from-gray-200'>
 			<section className='max-w-full m-0 p-0'>
 				<div className='relative flex justify-center h-32'>
 					<div className='w-full'>

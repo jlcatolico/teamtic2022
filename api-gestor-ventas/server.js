@@ -6,7 +6,7 @@ import Express from "express";
 import dotenv from 'dotenv';
 import { conectarDB} from './db/db.js';
 import rutasProducto from "./views/productos/rutas.js";
-import rutasVenta from "./views/ventas/rutas.js";
+
 
 dotenv.config({ path: './.env' });
 
@@ -22,8 +22,6 @@ app.use((req, res, next) => {
 });
 
 app.use(rutasProducto);
-app.use(rutasVenta);
-
 
 const main = () => {
 

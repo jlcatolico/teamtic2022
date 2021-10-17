@@ -24,6 +24,7 @@ rutasProducto.route('/productos/:id').get((req, res) => {
 
 
 rutasProducto.route('/productos').post((req, res) => {
+    console.log('creando producto: ' );
     crearVehiculo(req.body, genericCallback(res));
 });
 

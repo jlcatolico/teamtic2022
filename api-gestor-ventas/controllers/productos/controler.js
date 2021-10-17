@@ -15,23 +15,22 @@ const crearVehiculo = async (datosProducto, callback) => {
 
     //console.log(req);
     //console.log('llaves: ', Object.keys(datosProducto));
-    try {
+    
         if (
             Object.keys(datosProducto).includes('id_producto') &&
             Object.keys(datosProducto).includes('descripcion') &&
             Object.keys(datosProducto).includes('precio_unitario') &&
             Object.keys(datosProducto).includes('estado')
         ) {
+            console.log('Campos ok');
             const conexion = getDB();
             await conexion.collection('productos').insertOne(datosProducto, callback);
+            console.log('Campos Insertados');
         }
         else {
             return "error campos";
+            console.log('Error en campos');
         }
-    }
-    catch {
-        return "error";
-    }
 };
 
 const editarProducto = async (id, datosProducto, callback) => {

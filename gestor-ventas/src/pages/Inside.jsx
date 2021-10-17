@@ -7,7 +7,7 @@ import Maria from 'Media/MARIA.jpg';
 
 const Inside = () => {
 	return (
-		<div className=' w-full bg-gradient-to-br from-gray-200 via-gray-500 to-gray-900'>
+		<div className=' w-full h-full bg-gradient-to-br from-gray-200 via-gray-500 to-gray-900'>
 			<section className='max-w-full m-0 p-0'>
 				<div className='relative flex justify-center h-32'>
 					<div className='w-full'>
@@ -19,7 +19,7 @@ const Inside = () => {
 				</div>
 			</section>
 			<section className='relative flex items-center justify-between mt-20'>
-				<div className='w-full'>
+				<div className='w-full h-full'>
 					<div className='px-6'>
 						<img alt='VALEN' src={Valen} className='shadow-lg rounded-full mx-auto max-w-120-px' />
 						<div className='pt-6 text-center'>

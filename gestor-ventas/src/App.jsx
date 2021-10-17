@@ -6,6 +6,7 @@ import PublicLayout from 'layouts/PublicLayout';
 import Login from 'pages/Login';
 import Registro from 'pages/Registro';
 import Index from 'pages/Index';
+import Productos from 'pages/Productos';
 import ProductosActualizar from 'pages/ProductosActualizar';
 import ProductosCrear from 'pages/ProductosCrear';
 import ProductosListar from 'pages/ProductosListar';
@@ -33,11 +34,14 @@ function App() {
               </Switch>
             </AuthLayout>
           </Route>
-          <Route path={['/Inside', '/ProductosActualizar', '/ProductosCrear','/ProductosListar', '/UsuariosActualizar', '/UsuariosListar', '/VentasActualizar', '/VentasCrear', '/VentasListar']}>
+          <Route path={['/Inside','/Productos', '/ProductosActualizar', '/ProductosCrear','/ProductosListar', '/UsuariosActualizar', '/UsuariosListar', '/VentasActualizar', '/VentasCrear', '/VentasListar']}>
             <PrivateLayout>
               <Switch>
                 <Route path='/Inside'>
                   <Inside/>
+                </Route>
+                <Route path='/Productos'>
+                  <Productos/>
                 </Route>
                 <Route path='/ProductosActualizar'>
                   <ProductosActualizar/>

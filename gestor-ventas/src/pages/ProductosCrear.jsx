@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
+const enviaDatosAlBacken =()=>{
+	console.log('Prueba boton');
+}
 
 const ProductosCrear = () => {
 	return (
@@ -44,7 +48,7 @@ const ProductosCrear = () => {
 								</div>
 							</div>
 							<div className='px-4 py-3 bg-gray-50 text-right sm:px-2 mb-5'>
-								<button type='submit' className='searchButton'>
+								<button type='submit' onClick={enviaDatosAlBacken} className='searchButton col-s'>
 									Guardar
 								</button>
 							</div>

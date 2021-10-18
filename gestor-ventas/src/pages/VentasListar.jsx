@@ -1,58 +1,25 @@
-import React from 'react';
+import React ,{ useEffect, useState, useRef } from 'react';
 import {Link} from 'react-router-dom';
+import axios from "axios";
 
-const sale = [
-	{
-		id_venta: 202110030001,
-		valor_venta: 100000,
-		id_producto: 1,
-		cantidad: 5,
-		precio_unitario: 20000,
-		fecha_venta: '10/03/2021',
-		id_cliente: 1088328203,
-		nombre_cliente: 'Valentina Arbelaez',
-		vendedor: 'Jane Cooper',
-		estado: 'En proceso',
-	},
-	{
-		id_venta: 202110030001,
-		valor_venta: 100000,
-		id_producto: 11,
-		cantidad: 5,
-		precio_unitario: 20000,
-		fecha_venta: '10/03/2021',
-		id_cliente: 1088328203,
-		nombre_cliente: 'Valentina Arbelaez',
-		vendedor: 'Jane Cooper',
-		estado: 'Entregada',
-	},
-	{
-		id_venta: 202110030001,
-		valor_venta: 100000,
-		id_producto: 1,
-		cantidad: 5,
-		precio_unitario: 20000,
-		fecha_venta: '10/03/2021',
-		id_cliente: 1088328203,
-		nombre_cliente: 'Valentina Arbelaez',
-		vendedor: 'Jane Cooper',
-		estado: 'Cancelada',
-	},
-	{
-		id_venta: 202110030001,
-		valor_venta: 100000,
-		id_producto: 11,
-		cantidad: 5,
-		precio_unitario: 20000,
-		fecha_venta: '10/03/2021',
-		id_cliente: 1088328203,
-		nombre_cliente: 'Valentina Arbelaez',
-		vendedor: 'Jane Cooper',
-		estado: 'En proceso',
-	},
-];
+
 
 const VentasListar = () => {
+
+	const[ventas, setVentas] = useState([]);
+
+
+	useEffect(() => {
+		const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
+		axios.request(options).then(function (response) {
+			console.log(response.data);
+			setVentas(response.data)
+		}).catch(function (error) {
+			console.error(error);
+		});}, []);
+
+
+
 	return (
 		<div className='w-full h-full flex flex-col overflow-hidden'>
 			<h2 className='text-lg font-medium leading-6 text-gray-900 p-3'>Listado de Ventas</h2>
@@ -124,7 +91,7 @@ const VentasListar = () => {
 								</tr>
 							</thead>
 							<tbody className='bg-white divide-y divide-gray-200'>
-								{sale.map((sale) => (
+								{ventas.map((sale) => (
 									<tr key={sale.id_venta}>
 										<td className='spaceTable resultTable text-gray-900 font-medium'>{sale.id_venta}</td>
 										<td className='spaceTable resultTable'>{sale.valor_venta}</td>

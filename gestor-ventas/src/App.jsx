@@ -6,6 +6,8 @@ import PublicLayout from 'layouts/PublicLayout';
 import Login from 'pages/Login';
 import Registro from 'pages/Registro';
 import Index from 'pages/Index';
+import AcercaDeNosotros from 'pages/AcercaDeNosotros';
+import AcercaDeNosotrosPublic from 'pages/AcercaDeNosotrosPublic';
 import Productos from 'pages/Productos';
 import ProductosActualizar from 'pages/ProductosActualizar';
 import ProductosCrear from 'pages/ProductosCrear';
@@ -48,6 +50,7 @@ function App() {
 							'/VentasActualizar',
 							'/VentasCrear',
 							'/VentasListar',
+							'/AcercaDeNosotros',
 						]}>
 						<PrivateLayout>
 							<Switch>
@@ -84,12 +87,18 @@ function App() {
 								<Route path='/VentasCrear'>
 									<VentasCrear />
 								</Route>
+								<Route path='/AcercaDeNosotros'>
+									<AcercaDeNosotros />
+								</Route>
 							</Switch>
 						</PrivateLayout>
 					</Route>
-					<Route path={['/']}>
+					<Route path={['AcercaDeNosotrosPublic','/']}>
 						<PublicLayout>
 							<Switch>
+								<Route path='/AcercaDeNosotosPublic'>
+									<AcercaDeNosotrosPublic/>
+								</Route>
 								<Route path='/'>
 									<Index />
 								</Route>

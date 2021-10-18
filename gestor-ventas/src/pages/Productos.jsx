@@ -10,16 +10,32 @@ const Productos = () => {
     const [mostrarTabla, setMostrarTabla] = useState(true);
     const [textoBoton, setTextoBoton] = useState('Crear Producto');
     const [productos, setProductos] = useState([]);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
+
+
+    useEffect(() => {
+
+        const obtenerProductos = async () => {
+            const options = { method: 'GET', url: 'http://localhost:5000/productos/' };
+
+            await axios.request(options).then(function (response) {
+                setProductos(response.data)
+            })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        };
+
+        if (ejecutarConsulta) {
+            obtenerProductos();
+            setEjecutarConsulta(false);
+        }
+
+    }, [ejecutarConsulta]);
 
     useEffect(() => {
         if (mostrarTabla) {
-            const options = { method: 'GET', url: 'http://localhost:5000/productos/' };
-
-            axios.request(options).then(function (response) {
-                setProductos(response.data)
-            }).catch(function (error) {
-                console.error(error);
-            });
+            setEjecutarConsulta(true);
         }
     }, [mostrarTabla]);
 
@@ -48,14 +64,18 @@ const Productos = () => {
                     className='text-white bg-green-500 p-3 rounded-lg bottom-4 hover:bg-green-600 '>{textoBoton}</button>
             </div>
             <div>
-                {mostrarTabla ? <TablaProductos listaProductos={productos} setProductos={setProductos} /> : <FormularioCreacionProductos setMostrarTabla={setMostrarTabla} />}
+                {mostrarTabla ? (
+                    <TablaProductos listaProductos={productos} setEjecutarConsulta={setEjecutarConsulta} />
+                ) : (
+                    <FormularioCreacionProductos setMostrarTabla={setMostrarTabla} />
+                )}
                 <ToastContainer position='bottom-center' autoClose={2000} />
             </div>
         </div>
     );
 };
 
-const TablaProductos = ({ listaProductos, setProductos }) => {
+const TablaProductos = ({ listaProductos, setEjecutarConsulta }) => {
 
     const form = useRef(null);
 
@@ -99,7 +119,7 @@ const TablaProductos = ({ listaProductos, setProductos }) => {
                             </div>
 
                             <table className='min-w-full divide-y divide-gray-200'>
-                                <thead className='bg-gray-50'>
+                                <thead className='bg-gray-300'>
                                     <tr>
                                         <th scope='col' className='labelTable'>
                                             ID Producto
@@ -120,7 +140,7 @@ const TablaProductos = ({ listaProductos, setProductos }) => {
                                 </thead>
                                 <tbody className='bg-white divide-y divide-gray-200'>
                                     {listaProductos.map((producto) => (
-                                        <FilaPoducto key={nanoid()} producto={producto} />
+                                        <FilaPoducto key={nanoid()} producto={producto} setEjecutarConsulta={setEjecutarConsulta} />
                                     ))}
                                 </tbody>
                             </table>
@@ -182,22 +202,73 @@ const TablaProductos = ({ listaProductos, setProductos }) => {
 };
 
 
-const FilaPoducto = ({ producto }) => {
+const FilaPoducto = ({ producto, setEjecutarConsulta }) => {
+
+    //console.log(producto);
 
     const [edit, setEdit] = useState(false);
 
-const actualizarVehiculo = ()=>{
+    const [nuevoProducto, setnuevoProducto] = useState({
+        id_producto: producto.id_producto,
+        descripcion: producto.descripcion,
+        precio_unitario: producto.precio_unitario,
+        estado: producto.estado,
+    });
 
-};
+
+    const actualizarVehiculo = async () => {
+        console.log(nuevoProducto);
+
+        const options = {
+            method: 'PATCH',
+            url: `http://localhost:5000/productos/${producto._id}`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { ...nuevoProducto }
+        };
+
+        await axios.request(options).then(function (response) {
+            console.log(response.data);
+            toast.success("Producto Moficado con exito");
+            setEjecutarConsulta(true);
+            setEdit(false);
+        }).catch(function (error) {
+            console.error(error);
+            toast.error("El Producto no se pudo modificar");
+        });
+
+
+    };
+
+    const eliminarVehiculo = async () => {
+
+        const options = {
+            method: 'DELETE',
+            url: `http://localhost:5000/productos/${producto._id}`,
+        };
+
+        axios.request(options).then(function (response) {
+            console.log(response.data);
+            toast.success("Producto Eliminado con exito");
+            setEjecutarConsulta(true);
+        }).catch(function (error) {
+            console.error(error);
+            toast.error("El Producto no se pudo eliminar");
+        });
+    }
+
 
     return (
         <tr>
             {edit ?
                 <>
-                    <td className='p-4'> <input type="text" defaultValue={producto.id_producto} className='w-full p-1 rounded-md text-gray-600 border-gray-400'></input></td>
-                    <td className='p-4'> <input type="text" defaultValue={producto.descripcion} className='w-full p-1 rounded-md text-gray-600 border-gray-400' ></input></td>
-                    <td className='p-4'> <input type="text" defaultValue={producto.precio_unitario} className='w-full p-1 rounded-md text-gray-600 border-gray-400' ></input></td>
-                    <td className='p-4'> <select id='estado' defaultValue={producto.estado} name='estado' className='w-full p-1 rounded-md text-gray-600 border-gray-400' required defaultValue={0}>
+                    <td className='p-4'> <input type="number" value={nuevoProducto.id_producto} className='w-full p-1 rounded-md text-gray-600 border-gray-400'
+                        onChange={(e) => setnuevoProducto({ ...nuevoProducto, id_producto: e.target.value })}></input></td>
+                    <td className='p-4'> <input type="text" value={nuevoProducto.descripcion} className='w-full p-1 rounded-md text-gray-600 border-gray-400'
+                        onChange={(e) => setnuevoProducto({ ...nuevoProducto, descripcion: e.target.value })}></input></td>
+                    <td className='p-4'> <input type="number" value={nuevoProducto.precio_unitario} className='w-full p-1 rounded-md text-gray-600 border-gray-400'
+                        onChange={(e) => setnuevoProducto({ ...nuevoProducto, precio_unitario: e.target.value })}></input></td>
+                    <td className='p-4'> <select id='estado' value={nuevoProducto.estado} name='estado' className='w-full p-1 rounded-md text-gray-600 border-gray-400' required defaultValue={0}
+                        onChange={(e) => setnuevoProducto({ ...nuevoProducto, estado: e.target.value })}>
                         <option disabled value={0}>Seleccione una Opcion</option>
                         <option>Disponible</option>
                         <option>No Disponible</option>
@@ -225,7 +296,7 @@ const actualizarVehiculo = ()=>{
                         )
                     }
 
-                    <i className='fas fa-trash text-red-600 hover:text-red-300'></i>
+                    <i onClick={() => eliminarVehiculo()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
                 </div>
             </td>
         </tr>

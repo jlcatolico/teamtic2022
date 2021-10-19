@@ -5,7 +5,7 @@ import useActiveRouter from 'hooks/useActiveRouter';
 
 const Sidebar = () => {
 	return (
-		<nav className='hidden lg:flex md:w-50 bg-gradient-to-b from-white via-yellow-400 to-yellow-600 p-2 flex flex-col'>
+		<nav className='hidden lg:flex md:w-50 bg-gradient-to-b from-white via-gray-200 to-gray-400 p-2 flex flex-col'>
 			<div className='px-4'>
 				<img alt='...' src={Logo} className='max-w-100-px my-2' />
 			</div>

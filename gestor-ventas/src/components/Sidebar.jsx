@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link, useLocation} from 'react-router-dom';
-import Logo from 'Media/Toys.png';
+import Logo from 'Media/IconoToys.png';
 import useActiveRouter from 'hooks/useActiveRouter';
 
 const Sidebar = () => {
 	return (
-		<nav className='hidden md:flex md:w-50 bg-gray-600 p-2 flex flex-col'>
+		<nav className='hidden lg:flex md:w-50 bg-gradient-to-b from-white via-yellow-400 to-yellow-600 p-2 flex flex-col'>
 			<div className='px-4'>
-				<img alt='...' src={Logo} className='max-w-200-px my-2' />
+				<img alt='...' src={Logo} className='max-w-100-px my-2' />
 			</div>
 			<ul className='flex flex-col'>
 				<BotonSideBar nombre='Home' ruta='/Inside' icono='fas fa-home' color='red' />
@@ -19,11 +19,11 @@ const Sidebar = () => {
 	);
 };
 
-const BotonSideBar = ({nombre, ruta, icono, color}) => {
+const BotonSideBar = ({nombre, ruta, icono}) => {
 	const isActive = useActiveRouter(ruta);
 	return (
 		<Link to={ruta}>
-			<li className={`px-1 m-2 text-white p-2 rounded-lg bg-${color}-500 hover:bg-${color}-900 flex items-center`}>
+			<li className={`text-yellow-600 px-3 py-5 rounded-full text-md font-bold hover:bg-yellow-600 hover:text-white hover:font-extrabold hover:border-white hover:border-4`}>
 				<i className={`${icono} w-6`} />
 				{nombre}
 			</li>

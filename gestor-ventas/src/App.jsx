@@ -1,13 +1,11 @@
 import 'styles/styles.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateLayout from 'layouts/PrivateLayout';
 import AuthLayout from 'layouts/AuthLayout';
 import PublicLayout from 'layouts/PublicLayout';
 import Login from 'pages/Login';
 import Registro from 'pages/Registro';
 import Index from 'pages/Index';
-import AcercaDeNosotros from 'pages/AcercaDeNosotros';
-import AcercaDeNosotrosPublic from 'pages/AcercaDeNosotrosPublic';
 import Productos from 'pages/Productos';
 import ProductosActualizar from 'pages/ProductosActualizar';
 import ProductosCrear from 'pages/ProductosCrear';
@@ -19,6 +17,11 @@ import VentasCrear from 'pages/VentasCrear';
 import Inside from 'pages/Inside';
 import VentasListar from 'pages/VentasListar';
 import Usuarios from 'pages/Usuarios';
+import AcercaDeNosotros from 'pages/AcercaDeNosotros';
+import Marcas from 'pages/Marcas';
+import Edades from 'pages/Edades';
+import Categorias from 'pages/Categorias';
+import ServicioAlCliente from 'pages/ServicioAlCliente';
 
 function App() {
 	return (
@@ -50,7 +53,6 @@ function App() {
 							'/VentasActualizar',
 							'/VentasCrear',
 							'/VentasListar',
-							'/AcercaDeNosotros',
 						]}>
 						<PrivateLayout>
 							<Switch>
@@ -87,17 +89,34 @@ function App() {
 								<Route path='/VentasCrear'>
 									<VentasCrear />
 								</Route>
-								<Route path='/AcercaDeNosotros'>
-									<AcercaDeNosotros />
-								</Route>
 							</Switch>
 						</PrivateLayout>
 					</Route>
-					<Route path={['AcercaDeNosotrosPublic','/']}>
+					<Route
+						path={[
+							'/',
+							'/Marcas',
+							'/Edades',
+							'/Categorias',
+							'/ServicioAlCliente',
+							'/AcercaDeNosotros',
+						]}>
 						<PublicLayout>
 							<Switch>
-								<Route path='/AcercaDeNosotosPublic'>
-									<AcercaDeNosotrosPublic/>
+								<Route path='/Marcas'>
+									<Marcas />
+								</Route>
+								<Route path='/Edades'>
+									<Edades />
+								</Route>
+								<Route path='/Categorias'>
+									<Categorias />
+								</Route>
+								<Route path='/ServicioAlCliente'>
+									<ServicioAlCliente />
+								</Route>
+								<Route path='/AcercaDeNosotros'>
+									<AcercaDeNosotros />
 								</Route>
 								<Route path='/'>
 									<Index />

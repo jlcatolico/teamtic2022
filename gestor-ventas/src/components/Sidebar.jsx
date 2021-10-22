@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import Logo from 'Media/IconoToys.png';
-import useActiveRouter from 'hooks/useActiveRouter';
+import useActiveRoute from 'hooks/useActiveRoute';
 
 const Sidebar = () => {
 	return (
@@ -20,8 +20,7 @@ const Sidebar = () => {
 };
 
 const BotonSideBar = ({nombre, ruta, icono}) => {
-
-	const isActive = useActiveRouter(ruta);
+	const isActive = useActiveRoute(ruta);
 	return (
 		<Link to={ruta}>
 			<li className={`text-yellow-600 px-3 py-5 rounded-full text-md font-bold hover:bg-yellow-600 hover:text-white hover:font-extrabold hover:border-white hover:border-4`}>

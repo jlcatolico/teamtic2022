@@ -1,17 +1,13 @@
 import React from 'react'
-<<<<<<< HEAD
 import DesarrolloIT from 'Media/DesarrolloIT.ico'
 import DesarrolloIT_completo from 'Media/DesarrolloIT completo.ico'
 import user from 'Media/user.svg'
-import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-=======
 import IconoToys from 'Media/IconoToys.png'
 import ToysCompleto from 'Media/ToysCompleto.png'
 import { Link, useLocation } from 'react-router-dom';
 import useActiveRouter from 'hooks/useActiveRouter';
 
->>>>>>> 2281ea53a52a4bdb3b08980613139c63d9efa016
 
 
 const Navbar = () => {
@@ -34,19 +30,12 @@ const Navbar = () => {
                         </button>
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-<<<<<<< HEAD
+
                         <div className="flex-shrink-0 flex items-center">
                             <img className="block lg:hidden h-8 w-auto" src={DesarrolloIT} alt="GESTOR DE VENTAS"/>
 
                         </div>
-=======
-                        <Link to={"/"} className="flex text-center content-center items-center justify-center">
-                            <button className="flex text-center content-center items-center justify-center">
-                                <img className="block lg:hidden h-8 w-auto" src={IconoToys} alt="TOYS" />
-                                <img className="hidden lg:block h-8 w-auto" src={ToysCompleto} alt="TOYS" />
-                            </button>
-                        </Link>
->>>>>>> 2281ea53a52a4bdb3b08980613139c63d9efa016
+
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex space-x-4">
                                 <Link to={"/Marcas"}>
@@ -67,21 +56,13 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
+
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button onClick={() => loginWithRedirect()} type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             Login
                         </button>
                     </div>
-=======
-                    <Link to='/Login'>
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <button type="button" className="p-4 rounded-full text-white text-xl font-extrabold hover:bg-gray-200 hover:text-yellow-600 focus:outline-none focus:ring-full focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                                Login
-                            </button>
-                        </div>
-                    </Link>
->>>>>>> 2281ea53a52a4bdb3b08980613139c63d9efa016
+
                 </div>
             </div>
 

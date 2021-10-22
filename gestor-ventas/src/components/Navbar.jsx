@@ -2,14 +2,9 @@ import React from 'react'
 import IconoToys from 'Media/IconoToys.png'
 import ToysCompleto from 'Media/ToysCompleto.png'
 import user from 'Media/user.svg'
-<<<<<<< HEAD
-import { Link } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-
-=======
 import { Link, useLocation } from 'react-router-dom';
 import useActiveRouter from 'hooks/useActiveRouter';
->>>>>>> 2281ea53a52a4bdb3b08980613139c63d9efa016
 
 const Navbar = () => {
     const { logout } = useAuth0();
@@ -34,7 +29,7 @@ const Navbar = () => {
                             <img className="hidden lg:block h-8 w-auto" src={ToysCompleto} alt="TOYS" />
                         </div>
                     </div>
-<<<<<<< HEAD
+
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                             <span className="sr-only">View notifications</span>
@@ -45,7 +40,7 @@ const Navbar = () => {
                         <div className="ml-3 relative">
                             <div>
                                 <button onClick={() => logout({ returnTo: window.location.origin })} type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white text-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                   Cerrar Sesion
+                                    Cerrar Sesion
                                 </button>
                             </div>
                             <div className="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
@@ -53,19 +48,6 @@ const Navbar = () => {
                                 <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                                 <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                             </div>
-=======
-                    <div className="ml-3 relative">
-                        <div>
-                            <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span className="sr-only" >Open user menu</span>
-                                <img className="h-8 w-8 rounded-full" src={user} alt="" />
-                            </button>
-                        </div>
-                        <div className="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
->>>>>>> 2281ea53a52a4bdb3b08980613139c63d9efa016
                         </div>
                     </div>
                 </div>

@@ -46,18 +46,22 @@ const Usuarios = () => {
 	}, [mostrarTabla]);
 
 	return (
-		<div className='w-5/6'>
-			<div className=' my-4 w-full  p-2'>
-				<span className='text-gray-600 p-2 w-full text-2xl'>Administracion de Usuarios</span>
-			</div>
-			<div className='w-full flex justify-end'>
-				<button
-					onClick={() => {
-						setMostrarTabla(!mostrarTabla);
-					}}
-					className='text-white bg-green-500 p-3 rounded-lg bottom-4 hover:bg-green-600 '>
-					{textoBoton}
-				</button>
+		<div className='w-11/12'>
+			<div className='flex justify-evenly'>
+				<div className=' my-4 p-2 w-4/6'>
+					<span className='p-2 w-full text-2xl'>Administracion de Usuarios</span>
+				</div>
+				<div className=' w-2/6 flex items-center'>
+					<div className='w-full flex justify-end items-center'>
+						<button
+							onClick={() => {
+								setMostrarTabla(!mostrarTabla);
+							}}
+							className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
+							{textoBoton}
+						</button>
+					</div>
+				</div>
 			</div>
 			<div>
 				{mostrarTabla ? <TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} /> : <FormularioCreacionUsuarios setMostrarTabla={setMostrarTabla} />}
@@ -74,8 +78,6 @@ const TablaUsuarios = ({listaUsuarios, setEjecutarConsulta}) => {
 
 	return (
 		<div className='w-full h-full flex flex-col overflow-hidden'>
-			<h2 className='text-lg font-medium leading-6 text-gray-900 p-3'>Listado de Usuarios</h2>
-			<br />
 			<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
 				<div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
 					<div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3'>
@@ -252,7 +254,11 @@ const FilaUsuarios = ({usuario, setEjecutarConsulta}) => {
 			{edit ? (
 				<>
 					<td className='p-4'>
-						<input type='number' value={nuevoUsuario.identificacion} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, identificacion: e.target.value})}></input>
+						<input
+							type='number'
+							value={nuevoUsuario.identificacion}
+							className='inputSearch'
+							onChange={(e) => setnuevoUsuario({...nuevoUsuario, identificacion: e.target.value})}></input>
 					</td>
 					<td className='p-4'>
 						<input type='text' value={nuevoUsuario.nombre} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, nombre: e.target.value})}></input>
@@ -337,9 +343,9 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 
 		console.log(nuevoUsuario);
 		const options = {
-            method: 'POST',
-            url: 'http://localhost:5000/usuarios/',
-            headers: { 'Content-Type': 'application/json' },
+			method: 'POST',
+			url: 'http://localhost:5000/usuarios/',
+			headers: {'Content-Type': 'application/json'},
 			data: {
 				identificacion: nuevoUsuario.identificacion,
 				nombre: nuevoUsuario.nombre,

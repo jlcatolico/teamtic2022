@@ -1,10 +1,10 @@
 import Express from "express";
 import {
-  queryAllProductos,
-  crearVehiculo,
+  listarProductos,
+  crearProducto,
   editarProducto,
   eliminarProducto,
-  queryProducto,
+  busquedaProducto,
 } from "../../controllers/productos/controler.js";
 import { getDB } from "../../db/db.js";
 
@@ -19,16 +19,16 @@ const genericCallback = (res) => (err, result) => {
 };
 
 rutasProducto.route("/productos").get((req, res) => {
-  queryAllProductos(genericCallback(res));
+  listarProductos(genericCallback(res));
 });
 
 rutasProducto.route("/productos/:id").get((req, res) => {
-  queryProducto(req.params.id, genericCallback(res));
+  busquedaProducto(req.params.id, genericCallback(res));
 });
 
 rutasProducto.route("/productos").post((req, res) => {
   console.log("creando producto: ");
-  crearVehiculo(req.body, genericCallback(res));
+  crearProducto(req.body, genericCallback(res));
 });
 
 rutasProducto.route("/productos/:id").patch((req, res) => {

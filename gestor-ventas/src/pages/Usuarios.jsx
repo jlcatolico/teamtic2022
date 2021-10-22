@@ -9,12 +9,13 @@ const Usuarios = () => {
 	const [mostrarTabla, setMostrarTabla] = useState(true);
 	const [textoBoton, setTextoBoton] = useState('Crear Usuario');
 	const [usuarios, setUsuarios] = useState([]);
+	const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
 
 	useEffect(() => {
-		if (mostrarTabla) {
+		const obtenerUsuarios = async () => {
 			const options = {method: 'GET', url: 'http://localhost:5000/usuarios/'};
 
-			axios
+			await axios
 				.request(options)
 				.then(function (response) {
 					setUsuarios(response.data);
@@ -22,6 +23,17 @@ const Usuarios = () => {
 				.catch(function (error) {
 					console.error(error);
 				});
+		};
+
+		if (ejecutarConsulta) {
+			obtenerUsuarios();
+			setEjecutarConsulta(false);
+		}
+	}, [ejecutarConsulta]);
+
+	useEffect(() => {
+		if (mostrarTabla) {
+			setEjecutarConsulta(true);
 		}
 	}, [mostrarTabla]);
 
@@ -48,14 +60,14 @@ const Usuarios = () => {
 				</button>
 			</div>
 			<div>
-				{mostrarTabla ? <TablaUsuarios listaUsuarios={usuarios} setUsuarios={setUsuarios} /> : <FormularioCreacionUsuarios setMostrarTabla={setMostrarTabla} />}
+				{mostrarTabla ? <TablaUsuarios listaUsuarios={usuarios} setEjecutarConsulta={setEjecutarConsulta} /> : <FormularioCreacionUsuarios setMostrarTabla={setMostrarTabla} />}
 				<ToastContainer position='bottom-center' autoClose={2000} />
 			</div>
 		</div>
 	);
 };
 
-const TablaUsuarios = ({listaUsuarios, setUsuarios}) => {
+const TablaUsuarios = ({listaUsuarios, setEjecutarConsulta}) => {
 	const form = useRef(null);
 
 	const sumitEdit = (e) => {};
@@ -104,10 +116,13 @@ const TablaUsuarios = ({listaUsuarios, setUsuarios}) => {
 								<thead className='bg-gray-50'>
 									<tr>
 										<th scope='col' className='labelTable'>
-											ID Usuario
+											Identificación
 										</th>
 										<th scope='col' className='labelTable'>
 											Nombre
+										</th>
+										<th scope='col' className='labelTable'>
+											Apellido
 										</th>
 										<th scope='col' className='labelTable'>
 											Correo
@@ -125,7 +140,7 @@ const TablaUsuarios = ({listaUsuarios, setUsuarios}) => {
 								</thead>
 								<tbody className='bg-white divide-y divide-gray-200'>
 									{listaUsuarios.map((usuario) => (
-										<FilaUsuarios key={nanoid()} usuario={usuario} />
+										<FilaUsuarios key={nanoid()} usuario={usuario} setEjecutarConsulta={setEjecutarConsulta} />
 									))}
 								</tbody>
 							</table>
@@ -177,26 +192,86 @@ const TablaUsuarios = ({listaUsuarios, setUsuarios}) => {
 	);
 };
 
-const FilaUsuarios = ({usuario}) => {
+const FilaUsuarios = ({usuario, setEjecutarConsulta}) => {
 	const [edit, setEdit] = useState(false);
 
-	const actualizarUsuario = () => {};
+	const [nuevoUsuario, setnuevoUsuario] = useState({
+		identificacion: usuario.identificacion,
+		nombre: usuario.nombre,
+		apellido: usuario.apellido,
+		correo: usuario.correo,
+		estado: usuario.estado,
+		rol: usuario.rol,
+	});
+
+	const actualizarUsuario = async () => {
+		console.log(nuevoUsuario);
+
+		const options = {
+			method: 'PATCH',
+			url: `http://localhost:5000/usuarios/${usuario._id}`,
+			headers: {'Content-Type': 'application/json'},
+			data: {...nuevoUsuario},
+		};
+
+		await axios
+			.request(options)
+			.then(function (response) {
+				console.log(response.data);
+				toast.success('Usuario Moficado con exito');
+				setEjecutarConsulta(true);
+				setEdit(false);
+			})
+			.catch(function (error) {
+				console.error(error);
+				toast.error('El usuario no se pudo modificar');
+			});
+	};
+
+	const eliminarUsuario = async () => {
+		const options = {
+			method: 'DELETE',
+			url: `http://localhost:5000/usuarios/${usuario._id}`,
+		};
+
+		axios
+			.request(options)
+			.then(function (response) {
+				console.log(response.data);
+				toast.success('Usuario Eliminado con exito');
+				setEjecutarConsulta(true);
+			})
+			.catch(function (error) {
+				console.error(error);
+				toast.error('El usuario no se pudo eliminar');
+			});
+	};
 
 	return (
 		<tr>
 			{edit ? (
 				<>
 					<td className='p-4'>
-						<input type='text' defaultValue={usuario.identificacion} className='listado'></input>
+						<input type='number' value={nuevoUsuario.identificacion} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, identificacion: e.target.value})}></input>
 					</td>
 					<td className='p-4'>
-						<input type='text' defaultValue={usuario.nombre} className='listado'></input>
+						<input type='text' value={nuevoUsuario.nombre} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, nombre: e.target.value})}></input>
 					</td>
 					<td className='p-4'>
-						<input type='text' defaultValue={usuario.correo} className='listado'></input>
+						<input type='text' value={nuevoUsuario.apellido} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, apellido: e.target.value})}></input>
 					</td>
 					<td className='p-4'>
-						<select id='estado' defaultValue={usuario.estado} name='estado' className='listado' required defaultValue={0}>
+						<input type='email' value={nuevoUsuario.correo} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, correo: e.target.value})}></input>
+					</td>
+					<td className='p-4'>
+						<select
+							id='estado'
+							value={nuevoUsuario.estado}
+							name='estado'
+							className='listado'
+							onChange={(e) => setnuevoUsuario({...nuevoUsuario, estado: e.target.value})}
+							required //revisar, creo que no es necesario
+							defaultValue={0}>
 							<option disabled value={0}>
 								Seleccione una Opcion
 							</option>
@@ -206,7 +281,14 @@ const FilaUsuarios = ({usuario}) => {
 						</select>
 					</td>
 					<td className='p-4'>
-						<select id='estado' defaultValue={usuario.rol} name='rol' className='listado' required defaultValue={0}>
+						<select
+							id='estado'
+							value={nuevoUsuario.rol}
+							name='rol'
+							className='listado'
+							onChange={(e) => setnuevoUsuario({...nuevoUsuario, rol: e.target.value})}
+							required
+							defaultValue={0}>
 							<option disabled value={0}>
 								Seleccione una Opcion
 							</option>
@@ -219,7 +301,9 @@ const FilaUsuarios = ({usuario}) => {
 				<>
 					<td className='spaceTable resultTable text-gray-900 font-medium '>{usuario.identificacion}</td>
 					<td className='spaceTable resultTable'>{usuario.nombre}</td>
+					<td className='spaceTable resultTable'>{usuario.apellido}</td>
 					<td className='spaceTable resultTable'>{usuario.correo}</td>
+					<td className='spaceTable resultTable'>{usuario.estado}</td>
 					<td className='spaceTable resultTable'>{usuario.rol}</td>
 				</>
 			)}
@@ -232,7 +316,7 @@ const FilaUsuarios = ({usuario}) => {
 						<i onClick={() => setEdit(!edit)} className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
 					)}
 
-					<i className='fas fa-trash text-red-600 hover:text-red-300'></i>
+					<i onClick={() => eliminarUsuario()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
 				</div>
 			</td>
 		</tr>
@@ -253,14 +337,16 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 
 		console.log(nuevoUsuario);
 		const options = {
-			method: 'POST',
-			url: 'http://localhost:5000/usuarios/',
-			headers: {'Content-Type': 'application/json'},
+            method: 'POST',
+            url: 'http://localhost:5000/usuarios/',
+            headers: { 'Content-Type': 'application/json' },
 			data: {
 				identificacion: nuevoUsuario.identificacion,
-				descripcion: nuevoUsuario.nombre,
-				precio_unitario: nuevoUsuario.correo,
-				estado: nuevoUsuario.rol,
+				nombre: nuevoUsuario.nombre,
+				apellido: nuevoUsuario.apellido,
+				correo: nuevoUsuario.correo,
+				estado: nuevoUsuario.estado,
+				rol: nuevoUsuario.rol,
 			},
 		};
 
@@ -270,13 +356,13 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 			.request(options)
 			.then(function (response) {
 				console.log(response.data);
-				toast.success('Usuario agregado con exito');
 			})
 			.catch(function (error) {
 				console.error(error);
-				toast.error('Error creando usuario');
 			});
 
+		console.log('enviado');
+		toast.success('Usuario agregado con exito');
 		setMostrarTabla(true);
 	};
 
@@ -291,7 +377,7 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 						<div className='grid grid-cols-1'>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='id'>
-									Id. Usuario
+									Identificación
 								</label>
 								<input type='number' name='identificacion' id='identificacion' className='inputTextE ' required />
 							</div>
@@ -299,18 +385,24 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
 									Nombre
 								</label>
-								<input type='text' name='descripcion' id='descripcion' className='inputTextE' required />
+								<input type='text' name='nombre' id='nombre' className='inputTextE' required />
+							</div>
+							<div>
+								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
+									Apellido
+								</label>
+								<input type='text' name='apellido' id='apellido' className='inputTextE' required />
 							</div>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='ValorUnitario'>
 									Correo
 								</label>
-								<input type='number' name='precio_unitario' id='precio_unitario' className='inputTextE' required />
+								<input type='email' name='correo' id='correo' className='inputTextE' required />
 							</div>
 
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='estado'>
-									Estado Usuario
+									Estado
 								</label>
 								<select id='estado' name='estado' className='inputTextE text-gray-600' required defaultValue={0}>
 									<option disabled value={0}>
@@ -325,7 +417,7 @@ const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='estado'>
 									Rol
 								</label>
-								<select id='estado' name='estado' className='inputTextE text-gray-600' required defaultValue={0}>
+								<select id='rol' name='rol' className='inputTextE text-gray-600' required defaultValue={0}>
 									<option disabled value={0}>
 										Seleccione una Opcion
 									</option>

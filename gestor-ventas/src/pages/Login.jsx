@@ -1,20 +1,19 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import DesarrolloIT_completo from 'Media/DesarrolloIT completo.ico';
+import { Link } from 'react-router-dom';
+import ToysCompleto from 'Media/ToysCompleto.png';
+import LOGO from 'Media/ToysCompleto.png';
 
 const Login = () => {
 	return (
-		<section className='min-h-screen flex items-stretch text-white '>
+		<section className='w-screen h-screen flex items-stretch text-white '>
 			<div
-				className='lg:flex w-1/2 hidden bg-gray-800 bg-no-repeat bg-cover relative items-center'
-				style={{
-					backgroundImage:
-						'https://images.unsplash.com/photo-1577495508048-b635879837f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80',
-				}}>
+				className='lg:flex w-1/2 hidden bg-gray-800 bg-no-repeat bg-cover relative items-center ImagenLogin'>
 				<div className='absolute bg-black opacity-60 inset-0 z-0'></div>
 				<div className='w-full px-24 z-10'>
-					<h1 className='text-5xl border-gray-300 font-bold text-left tracking-wide'>Gestor de Ventas</h1>
-					<p className='text-3xl my-4'>Sprint2 - MinTic 2022</p>
+					<div className="w-full h-full flex justify-center items-center">
+						<img className="h-36" src={LOGO} alt="LOGO" />
+					</div>
+					<p className='text-3xl my-8 text-center font-extrabold'>Sprint 3 y 4 - MinTic 2022</p>
 				</div>
 				<div className='bottom-0 absolute p-2 text-center right-0 left-0 flex justify-center space-x-4 '>
 					<a href='' className='text-white ml-1'>
@@ -34,22 +33,22 @@ const Login = () => {
 				</div>
 				<div className='w-full pt-2 pb-1 z-20'>
 					<h1 className='my-3'>
-						<img className='w-auto h-28 inline-flex' src={DesarrolloIT_completo} alt='GESTOR DE VENTAS' />
-						<p className='text-3xl mt-3 mb-1 text-black'>Login with</p>
+						<img className='w-auto h-28 inline-flex' src={ToysCompleto} alt='TOYS' />
+						<p className='text-3xl mt-3 mb-1 text-black font-extrabold'>Login with</p>
 					</h1>
 					<div className='py-6 space-x-2'>
 						<a href=''>
-							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-black border-2 border-black'>
+							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-yellow-600 border-2 border-yellow-600'>
 								f
 							</span>
 						</a>
 						<a href=''>
-							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-black border-2 border-black'>
+							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-yellow-600 border-2 border-yellow-600'>
 								G+
 							</span>
 						</a>
 						<a href=''>
-							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-black border-2 border-black'>
+							<span className='w-10 h-10 items-center justify-center inline-flex rounded-full font-bold text-lg text-yellow-600 border-2 border-yellow-600'>
 								in
 							</span>
 						</a>
@@ -79,14 +78,14 @@ const Login = () => {
 						</div>
 						<Link to='/Inside'>
 							<div className='px-4 pb-2 pt-4'>
-								<button className='block w-full p-2 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none'>
+								<button className='block w-full p-2 shadow-xl text-lg border border-2 font-extrabold rounded-full bg-yellow-600 hover:bg-white hover:text-yellow-600 hover:border-yellow-600 focus:outline-none'>
 									Login
 								</button>
 							</div>
 						</Link>
 						<Link to='/Registro'>
 							<div className='px-4 pb-2 pt-4'>
-								<button className='block w-full p-2 text-lg rounded-full bg-green-600 hover:bg-green-700 focus:outline-none'>
+								<button className='block w-full p-2 shadow-xl text-lg border border-2 border-yellow-600 font-extrabold rounded-full bg-white text-yellow-600 hover:bg-yellow-600 hover:text-white focus:outline-none'>
 									Registro
 								</button>
 							</div>

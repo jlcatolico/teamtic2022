@@ -1,5 +1,5 @@
 import 'styles/styles.css';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PrivateLayout from 'layouts/PrivateLayout';
 import AuthLayout from 'layouts/AuthLayout';
 import PublicLayout from 'layouts/PublicLayout';
@@ -17,9 +17,19 @@ import VentasCrear from 'pages/VentasCrear';
 import Inside from 'pages/Inside';
 import VentasListar from 'pages/VentasListar';
 import Usuarios from 'pages/Usuarios';
+import AcercaDeNosotros from 'pages/AcercaDeNosotros';
+import Marcas from 'pages/Marcas';
+import Edades from 'pages/Edades';
+import Categorias from 'pages/Categorias';
+import ServicioAlCliente from 'pages/ServicioAlCliente';
+import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
 	return (
+		<Auth0Provider
+		domain='misiontic-teamtic2022.us.auth0.com'
+		clientId='MIcna23UC1pxqrntWCDKM22RQAz4MsyY'
+		redirectUri="http://localhost:3000/inside">
 		<div>
 			<Router>
 				<Switch>
@@ -87,9 +97,32 @@ function App() {
 							</Switch>
 						</PrivateLayout>
 					</Route>
-					<Route path={['/']}>
+					<Route
+						path={[
+							'/',
+							'/Marcas',
+							'/Edades',
+							'/Categorias',
+							'/ServicioAlCliente',
+							'/AcercaDeNosotros',
+						]}>
 						<PublicLayout>
 							<Switch>
+								<Route path='/Marcas'>
+									<Marcas />
+								</Route>
+								<Route path='/Edades'>
+									<Edades />
+								</Route>
+								<Route path='/Categorias'>
+									<Categorias />
+								</Route>
+								<Route path='/ServicioAlCliente'>
+									<ServicioAlCliente />
+								</Route>
+								<Route path='/AcercaDeNosotros'>
+									<AcercaDeNosotros />
+								</Route>
 								<Route path='/'>
 									<Index />
 								</Route>
@@ -99,6 +132,8 @@ function App() {
 				</Switch>
 			</Router>
 		</div>
+		</Auth0Provider>
+
 	);
 }
 

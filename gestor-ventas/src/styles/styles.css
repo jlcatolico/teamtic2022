@@ -60,3 +60,95 @@
 .listado {
 	@apply w-full p-1 rounded-md text-gray-600 border-gray-400;
 }
+
+.ImagenIndex {
+	width:max-content;
+  	background-image: url("https://www.10wallpaper.com/wallpaper/1366x768/1710/Blur_indoors_items_table_toy_HD_Wallpaper_1366x768.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenMarcas {
+	width:max-content;
+  	background-image: url("https://thumbs.dreamstime.com/z/fondo-abstracto-del-mosaico-32357493.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenMarcas {
+	width:max-content;
+  	background-image: url("https://www.10wallpaper.com/wallpaper/1366x768/1702/Santa_claus_christmas_toy-High_Quality_HD_Wallpaper_1366x768.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenEdades {
+	width:max-content;
+  	background-image: url("https://s1.1zoom.me/big0/382/271521-werecat.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenCategorias {
+	width:min-content;
+  	background-image: url("https://previews.123rf.com/images/medeja/medeja1602/medeja160200010/52250500-una-colecci%C3%B3n-de-dibujos-animados-de-colores-moderna-esboz%C3%B3-iconos-para-tipos-diferentes-juguetes-y-.jpg");
+	background-size:contain;
+  	background-repeat: repeat;
+  	background-position: start center;
+	background-attachment:scroll;
+}
+
+
+.ImagenServicioAlCliente {
+	width:max-content;
+  	background-image: url("https://thumbs.dreamstime.com/z/fondo-abstracto-del-mosaico-32357493.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+
+.ImagenAcercaDeNosotros {
+	width:max-content;
+  	background-image: url("https://www.peoplefirst.blog/wp-content/uploads/2018/12/beneficios-trabajo-en-equipo1.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenLogin {
+	width:max-content;
+  	background-image: url("https://fondosmil.com/fondo/32853.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenRegistro {
+	width:max-content;
+  	background-image: url("https://t3.ftcdn.net/jpg/01/65/43/58/360_F_165435840_dGBDMymnMu8IlEvZ71eKWJCynQYGyFzS.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}
+
+.ImagenSideBar {
+	width:max-content;
+  	background-image: url("https://image.freepik.com/foto-gratis/fondo-acuarela-pintada-mano-forma-cielo-nubes_24972-1094.jpg");
+	background-size:cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+	background-attachment:scroll;
+}

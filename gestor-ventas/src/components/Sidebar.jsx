@@ -10,16 +10,17 @@ const Sidebar = () => {
 				<img alt='...' src={Logo} className='max-w-100-px my-2' />
 			</div>
 			<ul className='flex flex-col'>
-				<BotonSideBar nombre='Home' ruta='/Inside' icono='fas fa-home' color='red' />
-				<BotonSideBar nombre='Productos' ruta='/Productos' icono='fas fa-gifts' color='red' />
-				<BotonSideBar nombre='Ventas' ruta='/VentasListar' icono='far fa-list-alt' color='red' />
-				<BotonSideBar nombre='Usuarios' ruta='/Usuarios' icono='fas fa-users' color='red' />
+				<BotonSideBar nombre='Home' ruta='/Inside' icono='fas fa-home' />
+				<BotonSideBar nombre='Productos' ruta='/Productos' icono='fas fa-gifts' />
+				<BotonSideBar nombre='Ventas' ruta='/VentasListar' icono='far fa-list-alt' />
+				<BotonSideBar nombre='Usuarios' ruta='/Usuarios' icono='fas fa-users' />
 			</ul>
 		</nav>
 	);
 };
 
 const BotonSideBar = ({nombre, ruta, icono}) => {
+
 	const isActive = useActiveRouter(ruta);
 	return (
 		<Link to={ruta}>

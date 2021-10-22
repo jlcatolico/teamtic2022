@@ -3,10 +3,11 @@ import DesarrolloIT from 'Media/DesarrolloIT.ico'
 import DesarrolloIT_completo from 'Media/DesarrolloIT completo.ico'
 import user from 'Media/user.svg'
 import { Link } from 'react-router-dom';
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Navbar = () => {
+    const { logout } = useAuth0();
     return (
         <nav className="bg-gray-500">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -47,9 +48,8 @@ const Navbar = () => {
                         </button>
                         <div className="ml-3 relative">
                             <div>
-                                <button type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                    <span className="sr-only" >Open user menu</span>
-                                        <img className="h-8 w-8 rounded-full" src={user} alt=""/>
+                                <button onClick={() => logout({ returnTo: window.location.origin })} type="button" className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white text-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                   Cerrar Sesion
                                 </button>
                             </div>
                             <div className="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">

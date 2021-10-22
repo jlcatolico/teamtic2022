@@ -3,10 +3,13 @@ import DesarrolloIT from 'Media/DesarrolloIT.ico'
 import DesarrolloIT_completo from 'Media/DesarrolloIT completo.ico'
 import user from 'Media/user.svg'
 import { Link } from 'react-router-dom';
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Navbar = () => {
+
+    const { loginWithRedirect } = useAuth0();
+
     return (
         <nav className="bg-gray-500">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -25,7 +28,7 @@ const Navbar = () => {
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex-shrink-0 flex items-center">
                             <img className="block lg:hidden h-8 w-auto" src={DesarrolloIT} alt="GESTOR DE VENTAS"/>
-                            
+
                         </div>
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex space-x-4">
@@ -38,13 +41,11 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-                    <Link to='/Login'>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <button type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <a href="#" className="bg-gray-800 text-white border-solid border-2 border-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-800 hover:text-white hover:font-bold" aria-current="page">Login</a>
+                        <button onClick={() => loginWithRedirect()} type="button" className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            Login
                         </button>
                     </div>
-                    </Link>
                 </div>
             </div>
 

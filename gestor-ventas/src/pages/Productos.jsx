@@ -4,29 +4,33 @@ import axios from 'axios';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
+import { crearProducto } from 'utils/api';
+import { obtenerProductos } from 'utils/api';
+import { editarProducto } from 'utils/api';
+import { deleteProducto } from 'utils/api';
 
 const Productos = () => {
 	const [mostrarTabla, setMostrarTabla] = useState(true);
 	const [textoBoton, setTextoBoton] = useState('Crear Producto');
 	const [productos, setProductos] = useState([]);
 	const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
+    const[loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		const obtenerProductos = async () => {
-			const options = {method: 'GET', url: 'http://localhost:5000/productos/'};
-
-			await axios
-				.request(options)
-				.then(function (response) {
-					setProductos(response.data);
-				})
-				.catch(function (error) {
-					console.error(error);
-				});
-		};
-
+		const fetchProductos = async () => {
+			
+			await obtenerProductos((response)=>{
+                console.log('la respuesta que se recibio fue', response);
+                setProductos(response.data);
+                setEjecutarConsulta(false);
+        },
+        (error) => {
+          console.error('Salio un error:', error);
+        }
+      );
+    };
 		if (ejecutarConsulta) {
-			obtenerProductos();
+			fetchProductos();
 			setEjecutarConsulta(false);
 		}
 	}, [ejecutarConsulta]);
@@ -188,46 +192,36 @@ const FilaPoducto = ({producto, setEjecutarConsulta}) => {
 	});
 
 	const actualizarVehiculo = async () => {
-		console.log(nuevoProducto);
-
-		const options = {
-			method: 'PATCH',
-			url: `http://localhost:5000/productos/${producto._id}`,
-			headers: {'Content-Type': 'application/json'},
-			data: {...nuevoProducto},
-		};
-
-		await axios
-			.request(options)
-			.then(function (response) {
+		await editarProducto(
+            producto._id,
+            nuevoProducto,
+            (response)=> {
 				console.log(response.data);
 				toast.success('Producto Moficado con exito');
 				setEjecutarConsulta(true);
 				setEdit(false);
-			})
-			.catch(function (error) {
-				console.error(error);
+            },
+            (error)=>{
+            console.error(error);
 				toast.error('El Producto no se pudo modificar');
-			});
+        }
+        );
+		
 	};
 
-	const eliminarVehiculo = async () => {
-		const options = {
-			method: 'DELETE',
-			url: `http://localhost:5000/productos/${producto._id}`,
-		};
-
-		axios
-			.request(options)
-			.then(function (response) {
+	const eliminarProducto = async () => {
+		await deleteProducto(
+            producto._id,
+            (response)=> {
 				console.log(response.data);
-				toast.success('Producto Eliminado con exito');
+				toast.success('Producto eliminado con exito');
 				setEjecutarConsulta(true);
-			})
-			.catch(function (error) {
-				console.error(error);
+            },
+            (error)=>{
+            console.error(error);
 				toast.error('El Producto no se pudo eliminar');
-			});
+        }
+        );
 	};
 
 	return (
@@ -285,7 +279,7 @@ const FilaPoducto = ({producto, setEjecutarConsulta}) => {
 						<i onClick={() => setEdit(!edit)} className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
 					)}
 
-					<i onClick={() => eliminarVehiculo()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
+					<i onClick={() => eliminarProducto()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
 				</div>
 			</td>
 		</tr>
@@ -304,27 +298,19 @@ const FormularioCreacionProductos = ({setMostrarTabla}) => {
 			nuevoProducto[key] = value;
 		});
 
-		console.log(nuevoProducto);
-		const options = {
-			method: 'POST',
-			url: 'http://localhost:5000/productos/',
-			headers: {'Content-Type': 'application/json'},
-			data: {id_producto: nuevoProducto.id_producto, descripcion: nuevoProducto.descripcion, precio_unitario: nuevoProducto.precio_unitario, estado: nuevoProducto.estado},
-		};
-
-		console.log('option ejecutados');
-
-		await axios
-			.request(options)
-			.then(function (response) {
-				console.log(response.data);
-			})
-			.catch(function (error) {
-				console.error(error);
-			});
-
-		console.log('enviado');
-		toast.success('producto agregado con exito');
+		await crearProducto({
+            id_producto: nuevoProducto.id_producto, descripcion: nuevoProducto.descripcion, precio_unitario: nuevoProducto.precio_unitario, estado: nuevoProducto.estado,
+		},
+        (response) => {
+          console.log(response.data);
+          toast.success('Producto agregado con éxito');
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error creando un producto');
+        }
+      );
+  
 		setMostrarTabla(true);
 	};
 

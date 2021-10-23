@@ -38,3 +38,21 @@ export const deleteProducto = async (id, successCallback, errorCallback) => {
     };
     await axios.request(options).then(successCallback).catch(errorCallback);
   };
+
+  //Usuarios
+
+  export const obtenerUsuarios = async (successCallback, errorCallback) => {
+    const options = {
+		method: 'GET',
+		url: `http://localhost:5000/usuarios`};
+        await axios.request(options).then(successCallback).catch(errorCallback);
+  };
+
+  //Ventas
+
+  export const crearVenta = async (successCallback, errorCallback) => {
+    const options = {
+		method: 'PATCH',
+		url: `http://localhost:5000/ventas`};
+        await axios.request(options).then(successCallback).catch(errorCallback);
+  };

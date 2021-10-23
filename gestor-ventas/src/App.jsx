@@ -22,7 +22,9 @@ import Marcas from 'pages/Marcas';
 import Edades from 'pages/Edades';
 import Categorias from 'pages/Categorias';
 import ServicioAlCliente from 'pages/ServicioAlCliente';
+import Ventas from 'pages/Ventas';
 import { Auth0Provider } from "@auth0/auth0-react";
+
 
 function App() {
 	return (
@@ -58,6 +60,7 @@ function App() {
 							'/VentasActualizar',
 							'/VentasCrear',
 							'/VentasListar',
+							'/Ventas',
 						]}>
 						<PrivateLayout>
 							<Switch>
@@ -93,6 +96,9 @@ function App() {
 								</Route>
 								<Route path='/VentasCrear'>
 									<VentasCrear />
+								</Route>
+								<Route path='/Ventas'>
+									<Ventas />
 								</Route>
 							</Switch>
 						</PrivateLayout>

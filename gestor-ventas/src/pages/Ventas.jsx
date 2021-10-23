@@ -1,9 +1,15 @@
 import {Link} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react';
-import axios from 'axios';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
+import {crearVenta} from 'utils/api';
+// import {obtenerVentas} from 'utils/api';
+// import {editarVenta} from 'utils/api';
+// import {deleteVenta} from 'utils/api';
+import {obtenerUsuarios} from 'utils/api';
+import {obtenerProductos} from 'utils/api';
+import Usuarios from './Usuarios';
 
 const Ventas = () => {
 	const [mostrarTabla, setMostrarTabla] = useState(true);
@@ -11,24 +17,52 @@ const Ventas = () => {
 	const [ventas, setVentas] = useState([]);
 	const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
 
-	useEffect(() => {
-		const obtenerVentas = async () => {
-			const options = {method: 'GET', url: 'http://localhost:5000/ventas/'};
+	const [vendedores, setVendedores] = useState([]);
+	const [productos, setProductos] = useState([]);
+	const [productosTabla, setProductosTabla] = useState([]);
 
-			await axios
-				.request(options)
-				.then(function (response) {
-					setVentas(response.data);
-				})
-				.catch(function (error) {
+	useEffect(() => {
+		const fetchVendedores = async () => {
+			await obtenerUsuarios(
+				(response) => {
+					setVendedores(response.data);
+				},
+				(error) => {
 					console.error(error);
-				});
+				}
+			);
 		};
 
-		if (ejecutarConsulta) {
-			obtenerVentas();
-			setEjecutarConsulta(false);
-		}
+		const fetchProductos = async () => {
+			await obtenerProductos(
+				(response) => {
+					setProductos(response.data);
+				},
+				(error) => {
+					console.error(error);
+				}
+			);
+		};
+
+		fetchVendedores();
+		fetchProductos();
+
+		// const fetchVentas = async () => {
+		// 	await obtenerVentas(
+		// 		(response) => {
+		// 			console.log('la respuesta que se recibio fue', response);
+		// 			setVentas(response.data);
+		// 			setEjecutarConsulta(false);
+		// 		},
+		// 		(error) => {
+		// 			console.error('Salio un error:', error);
+		// 		}
+		// 	);
+		// };
+		// if (ejecutarConsulta) {
+		// 	fetchVentas();
+		// 	setEjecutarConsulta(false);
+		// }
 	}, [ejecutarConsulta]);
 
 	useEffect(() => {
@@ -46,22 +80,18 @@ const Ventas = () => {
 	}, [mostrarTabla]);
 
 	return (
-		<div className='w-11/12'>
-			<div className='flex justify-evenly'>
-				<div className=' my-4 p-2 w-4/6'>
-					<span className='p-2 w-full text-2xl'>Administracion de Ventas</span>
-				</div>
-				<div className=' w-2/6 flex items-center'>
-					<div className='w-full flex justify-end items-center'>
-						<button
-							onClick={() => {
-								setMostrarTabla(!mostrarTabla);
-							}}
-							className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
-							{textoBoton}
-						</button>
-					</div>
-				</div>
+		<div className='w-5/6'>
+			<div className=' my-4 w-full  p-2'>
+				<span className='text-gray-600 p-2 w-full text-2xl'>Administracion de Ventas</span>
+			</div>
+			<div className='w-full flex justify-end'>
+				<button
+					onClick={() => {
+						setMostrarTabla(!mostrarTabla);
+					}}
+					className='text-white bg-green-500 p-3 rounded-lg bottom-4 hover:bg-green-600 '>
+					{textoBoton}
+				</button>
 			</div>
 			<div>
 				{mostrarTabla ? <TablaVentas listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} /> : <FormularioCreacionVentas setMostrarTabla={setMostrarTabla} />}
@@ -78,36 +108,28 @@ const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 
 	return (
 		<div className='w-full h-full flex flex-col overflow-hidden'>
+			<h2 className='text-lg font-medium leading-6 text-gray-900 p-3'>Listado de Ventas</h2>
+			<br />
 			<div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
 				<div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
 					<div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-3'>
 						<h1>Búsqueda</h1>
 						<form>
 							<div className='my-6 row flex flex-row justify-evenly items-center'>
-								<label htmlFor='correo' className='labelSearch'>
-									Correo
+								<label htmlFor='id_venta' className='labelSearch'>
+									Id. Venta
 								</label>
-								<input type='email' name='correo' id='correo' autoComplete='correo' className='inputSearch' />
-								<label htmlFor='rol' className='labelSearch'>
-									Rol
+								<input type='text' name='id_venta' id='id_venta' className='inputSearch' required />
+								<label htmlFor='descripcion_venta' className='labelSearch'>
+									Nombre Venta
 								</label>
-								<select id='rol' name='rol' autoComplete='rol' className='inputSearch'>
-									<option disabled value={0}>
-										Seleccionar
-									</option>
-									<option>Administrador</option>
-									<option>Vendedor</option>
-								</select>
+								<input type='text' name='descripcion_venta' id='descripcion_venta' autoComplete='descripcion_venta' className='inputSearch' required />
 								<label htmlFor='estado' className='labelSearch'>
 									Estado
 								</label>
-								<select id='estado' name='estado' autoComplete='estado' className='inputSearch'>
-									<option disabled value={0}>
-										Seleccionar
-									</option>
-									<option>Pendiente</option>
-									<option>Activo</option>
-									<option>Inactivo</option>
+								<select id='estado' name='estado' autoComplete='estado' className='inputSearch' required>
+									<option>Disponible</option>
+									<option>No Disponible</option>
 								</select>
 								<button type='submit' className='searchButton'>
 									Buscar
@@ -115,25 +137,31 @@ const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 							</div>
 
 							<table className='min-w-full divide-y divide-gray-200'>
-								<thead className='bg-gray-50'>
+								<thead className='bg-gray-300'>
 									<tr>
 										<th scope='col' className='labelTable'>
-											Identificación
+											ID Venta
 										</th>
 										<th scope='col' className='labelTable'>
-											Nombre
+											Vendedor
 										</th>
 										<th scope='col' className='labelTable'>
-											Apellido
+											ID Cliente
 										</th>
 										<th scope='col' className='labelTable'>
-											Correo
+											Nombre Cliente
+										</th>
+										<th scope='col' className='labelTable'>
+											Apellido Cliente
+										</th>
+										<th scope='col' className='labelTable'>
+											Fecha Venta
+										</th>
+										<th scope='col' className='labelTable'>
+											Valor Venta
 										</th>
 										<th scope='col' className='labelTable'>
 											Estado
-										</th>
-										<th scope='col' className='labelTable'>
-											Rol
 										</th>
 										<th scope='col' className='labelTable'>
 											Acciones
@@ -142,7 +170,7 @@ const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 								</thead>
 								<tbody className='bg-white divide-y divide-gray-200'>
 									{listaVentas.map((venta) => (
-										<FilaVentas key={nanoid()} venta={venta} setEjecutarConsulta={setEjecutarConsulta} />
+										<FilaPoducto key={nanoid()} venta={venta} setEjecutarConsulta={setEjecutarConsulta} />
 									))}
 								</tbody>
 							</table>
@@ -194,125 +222,98 @@ const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 	);
 };
 
-const FilaVentas = ({venta, setEjecutarConsulta}) => {
+const FilaPoducto = ({venta, setEjecutarConsulta}) => {
 	const [edit, setEdit] = useState(false);
 
-	const [nuevoVenta, setnuevoVenta] = useState({
-		identificacion: venta.identificacion,
-		nombre: venta.nombre,
-		apellido: venta.apellido,
-		correo: venta.correo,
+	const [nuevaVenta, setnuevaVenta] = useState({
+		id_venta: venta.id_venta,
+		vendedor: vendedores._id,
+		id_cliente: venta.id_cliente,
+		nombre_cliente: venta.nombre_cliente,
+		apellido_cliente: venta.apellido_cliente,
+		fecha_venta: venta.fecha_venta,
+		valor_venta: venta.valor_venta,
 		estado: venta.estado,
-		rol: venta.rol,
 	});
 
 	const actualizarVenta = async () => {
-		console.log(nuevoVenta);
-
-		const options = {
-			method: 'PATCH',
-			url: `http://localhost:5000/ventas/${venta._id}`,
-			headers: {'Content-Type': 'application/json'},
-			data: {...nuevoVenta},
-		};
-
-		await axios
-			.request(options)
-			.then(function (response) {
-				console.log(response.data);
-				toast.success('Venta Moficado con exito');
-				setEjecutarConsulta(true);
-				setEdit(false);
-			})
-			.catch(function (error) {
-				console.error(error);
-				toast.error('El venta no se pudo modificar');
-			});
+		// await editarVenta(
+		// 	venta._id,
+		// 	nuevaVenta,
+		// 	(response) => {
+		// 		console.log(response.data);
+		// 		toast.success('Venta Moficado con exito');
+		// 		setEjecutarConsulta(true);
+		// 		setEdit(false);
+		// 	},
+		// 	(error) => {
+		// 		console.error(error);
+		// 		toast.error('El Venta no se pudo modificar');
+		// 	}
+		// );
 	};
 
 	const eliminarVenta = async () => {
-		const options = {
-			method: 'DELETE',
-			url: `http://localhost:5000/ventas/${venta._id}`,
-		};
-
-		axios
-			.request(options)
-			.then(function (response) {
-				console.log(response.data);
-				toast.success('Venta Eliminado con exito');
-				setEjecutarConsulta(true);
-			})
-			.catch(function (error) {
-				console.error(error);
-				toast.error('El venta no se pudo eliminar');
-			});
+		// await deleteVenta(
+		// 	venta._id,
+		// 	(response) => {
+		// 		console.log(response.data);
+		// 		toast.success('Venta eliminado con exito');
+		// 		setEjecutarConsulta(true);
+		// 	},
+		// 	(error) => {
+		// 		console.error(error);
+		// 		toast.error('El Venta no se pudo eliminar');
+		// 	}
+		// );
 	};
 
 	return (
+		// <tr> //
+		// 	{edit ? (
+		// 		<>
+		// 			<td className='p-4'>
+		// 				{' '}
+		// 				<input type='number' value={nuevaVenta.id_venta} className='listado' onChange={(e) => setnuevaVenta({...nuevaVenta, id_venta: e.target.value})}></input>
+		// 			</td>
+		// 			<td className='p-4'>
+		// 				{' '}
+		// 				<input type='text' value={nuevaVenta.descripcion} className='listado' onChange={(e) => setnuevaVenta({...nuevaVenta, descripcion: e.target.value})}></input>
+		// 			</td>
+		// 			<td className='p-4'>
+		// 				{' '}
+		// 				<input type='number' value={nuevaVenta.precio_unitario} className='listado' onChange={(e) => setnuevaVenta({...nuevaVenta, precio_unitario: e.target.value})}></input>
+		// 			</td>
+		// 			<td className='p-4'>
+		// 				{' '}
+		// 				<select
+		// 					id='estado'
+		// 					value={nuevaVenta.estado}
+		// 					name='estado'
+		// 					className='listado'
+		// 					required
+		// 					defaultValue={0}
+		// 					onChange={(e) => setnuevaVenta({...nuevaVenta, estado: e.target.value})}>
+		// 					<option disabled value={0}>
+		// 						Seleccione una Opcion
+		// 					</option>
+		// 					<option>Disponible</option>
+		// 					<option>No Disponible</option>
+		// 				</select>
+		// 			</td>
+		// 		</>
+		// 	) : (
 		<tr>
-			{edit ? (
-				<>
-					<td className='p-4'>
-						<input
-							type='number'
-							value={nuevoVenta.identificacion}
-							className='inputSearch'
-							onChange={(e) => setnuevoVenta({...nuevoVenta, identificacion: e.target.value})}></input>
-					</td>
-					<td className='p-4'>
-						<input type='text' value={nuevoVenta.nombre} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, nombre: e.target.value})}></input>
-					</td>
-					<td className='p-4'>
-						<input type='text' value={nuevoVenta.apellido} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, apellido: e.target.value})}></input>
-					</td>
-					<td className='p-4'>
-						<input type='email' value={nuevoVenta.correo} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, correo: e.target.value})}></input>
-					</td>
-					<td className='p-4'>
-						<select
-							id='estado'
-							value={nuevoVenta.estado}
-							name='estado'
-							className='listado'
-							onChange={(e) => setnuevoVenta({...nuevoVenta, estado: e.target.value})}
-							required //revisar, creo que no es necesario
-							defaultValue={0}>
-							<option disabled value={0}>
-								Seleccione una Opcion
-							</option>
-							<option>Pendiente</option>
-							<option>Activo</option>
-							<option>Inactivo</option>
-						</select>
-					</td>
-					<td className='p-4'>
-						<select
-							id='estado'
-							value={nuevoVenta.rol}
-							name='rol'
-							className='listado'
-							onChange={(e) => setnuevoVenta({...nuevoVenta, rol: e.target.value})}
-							required
-							defaultValue={0}>
-							<option disabled value={0}>
-								Seleccione una Opcion
-							</option>
-							<option>Administrador</option>
-							<option>Vendedor</option>
-						</select>
-					</td>
-				</>
-			) : (
-				<>
-					<td className='spaceTable resultTable text-gray-900 font-medium '>{venta.identificacion}</td>
-					<td className='spaceTable resultTable'>{venta.nombre}</td>
-					<td className='spaceTable resultTable'>{venta.apellido}</td>
-					<td className='spaceTable resultTable'>{venta.correo}</td>
-					<td className='spaceTable resultTable'>{venta.estado}</td>
-					<td className='spaceTable resultTable'>{venta.rol}</td>
-				</>
-			)}
+			<>
+				<td className='spaceTable resultTable text-gray-900 font-medium '>{venta.id_venta}</td>
+				<td className='spaceTable resultTable'>{vendedores._id}</td>
+				<td className='spaceTable resultTable'>{venta.id_cliente}</td>
+				<td className='spaceTable resultTable'>{venta.nombre_cliente}</td>
+				<td className='spaceTable resultTable'>{venta.apellido_cliente}</td>
+				<td className='spaceTable resultTable'>{venta.fecha_venta}</td>
+				<td className='spaceTable resultTable'>{venta.valor_venta}</td>
+				<td className='spaceTable resultTable'>{venta.estado}</td>
+			</>
 
 			<td className='resultTable spaceTable font-medium'>
 				<div className='flex w-full justify-around'>
@@ -335,40 +336,48 @@ const FormularioCreacionVentas = ({setMostrarTabla}) => {
 	const sumitForm = async (e) => {
 		e.preventDefault();
 		const fd = new FormData(form.current);
-		const nuevoVenta = {};
 
+		const nuevaVenta = {};
 		fd.forEach((value, key) => {
-			nuevoVenta[key] = value;
+			nuevaVenta[key] = value;
 		});
 
-		console.log(nuevoVenta);
-		const options = {
-			method: 'POST',
-			url: 'http://localhost:5000/ventas/',
-			headers: {'Content-Type': 'application/json'},
-			data: {
-				identificacion: nuevoVenta.identificacion,
-				nombre: nuevoVenta.nombre,
-				apellido: nuevoVenta.apellido,
-				correo: nuevoVenta.correo,
-				estado: nuevoVenta.estado,
-				rol: nuevoVenta.rol,
-			},
+		console.log('nueva Venta', nuevaVenta);
+
+		const listaProductos = Object.keys(nuevaVenta)
+			.map((k) => {
+				if (k.includes('producto')) {
+					return productosTabla.filter((v) => v._id === nuevaVenta[k])[0];
+				}
+				return null;
+			})
+			.filter((v) => v);
+
+		const datosVenta = {
+			vendedor: vendedores.filter((v) => v._id === nuevaVenta.vendedor)[0],
+			vendedorid: vendedores._id,
+			id_cliente: nuevaVenta.id_cliente,
+			nombre_cliente: nuevaVenta.nombre_cliente,
+			apellido_cliente: nuevaVenta.apellido_cliente,
+			fecha_venta: nuevaVenta.fecha_venta,
+			valor_venta: nuevaVenta.valor_venta,
+			estado: nuevaVenta.estado,
+			cantidad: nuevaVenta.valor,
+			productos: listaProductos,
 		};
 
-		console.log('option ejecutados');
-
-		await axios
-			.request(options)
-			.then(function (response) {
+		await crearVenta(
+			datosVenta,
+			(response) => {
 				console.log(response.data);
-			})
-			.catch(function (error) {
+				toast.success('Venta agregado con éxito');
+			},
+			(error) => {
 				console.error(error);
-			});
+				toast.error('Error creando un venta');
+			}
+		);
 
-		console.log('enviado');
-		toast.success('Venta agregado con exito');
 		setMostrarTabla(true);
 	};
 
@@ -383,52 +392,64 @@ const FormularioCreacionVentas = ({setMostrarTabla}) => {
 						<div className='grid grid-cols-1'>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='id'>
-									Identificación
+									ID Venta
 								</label>
-								<input type='number' name='identificacion' id='identificacion' className='inputTextE ' required />
+								<input type='number' name='id_venta' id='id_venta' className='inputTextE ' required />
 							</div>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
-									Nombre
+									Vendedor
 								</label>
-								<input type='text' name='nombre' id='nombre' className='inputTextE' required />
+								<select id='vendedor' name='vendedor' className='inputTextE text-gray-600' required defaultValue={0}>
+									<option disabled value={0}>
+										Seleccione un vendedor
+									</option>
+									{vendedores.map((el) => {
+										return <option key={nanoid()} value={el._id}>{`${el.email}`}</option>;
+									})}
+								</select>
 							</div>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
-									Apellido
+									ID Cliente
 								</label>
-								<input type='text' name='apellido' id='apellido' className='inputTextE' required />
+								<input type='text' name='id_cliente' id='id_cliente' className='inputTextE' required />
+							</div>
+							<div>
+								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
+									Nombre Cliente
+								</label>
+								<input type='text' name='nombre_cliente' id='nombre_cliente' className='inputTextE' required />
+							</div>
+							<div>
+								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
+									Apellido Cliente
+								</label>
+								<input type='text' name='apellido_cliente' id='apellido_cliente' className='inputTextE' required />
 							</div>
 							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='ValorUnitario'>
-									Correo
+									Fecha Venta
 								</label>
-								<input type='email' name='correo' id='correo' className='inputTextE' required />
+								<input type='date' name='fecha_venta' id='fecha_venta' className='inputTextE' required />
 							</div>
 
 							<div>
+								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='Descripcion'>
+									Valor Venta
+								</label>
+								<input type='text' name='valor_venta' id='valor_venta' className='inputTextE' required />
+							</div>
+							<div>
 								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='estado'>
-									Estado
+									Estado Venta
 								</label>
 								<select id='estado' name='estado' className='inputTextE text-gray-600' required defaultValue={0}>
 									<option disabled value={0}>
 										Seleccione una Opcion
 									</option>
-									<option>Pendiente</option>
-									<option>Activo</option>
-									<option>Inactivo</option>
-								</select>
-							</div>
-							<div>
-								<label className=' tracking-wide mb-2 text-gray-600' htmlFor='estado'>
-									Rol
-								</label>
-								<select id='rol' name='rol' className='inputTextE text-gray-600' required defaultValue={0}>
-									<option disabled value={0}>
-										Seleccione una Opcion
-									</option>
-									<option>Administrador</option>
-									<option>Vendedor</option>
+									<option>Disponible</option>
+									<option>No Disponible</option>
 								</select>
 							</div>
 							<div className='my-8'>

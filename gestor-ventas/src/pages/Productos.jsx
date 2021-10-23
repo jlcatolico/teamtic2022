@@ -1,6 +1,5 @@
 import {Link} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react';
-import axios from 'axios';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {nanoid} from 'nanoid';
@@ -14,7 +13,7 @@ const Productos = () => {
 	const [textoBoton, setTextoBoton] = useState('Crear Producto');
 	const [productos, setProductos] = useState([]);
 	const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
-    const[loading, setLoading] = useState(false);
+
 
 	useEffect(() => {
 		const fetchProductos = async () => {
@@ -191,7 +190,7 @@ const FilaPoducto = ({producto, setEjecutarConsulta}) => {
 		estado: producto.estado,
 	});
 
-	const actualizarVehiculo = async () => {
+	const actualizarProducto = async () => {
 		await editarProducto(
             producto._id,
             nuevoProducto,
@@ -274,7 +273,7 @@ const FilaPoducto = ({producto, setEjecutarConsulta}) => {
 			<td className='resultTable spaceTable font-medium'>
 				<div className='flex w-full justify-around'>
 					{edit ? (
-						<i onClick={() => actualizarVehiculo()} className='fas fa-check text-green-600 hover:text-green-300' />
+						<i onClick={() => actualizarProducto()} className='fas fa-check text-green-600 hover:text-green-300' />
 					) : (
 						<i onClick={() => setEdit(!edit)} className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
 					)}

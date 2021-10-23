@@ -225,16 +225,16 @@ const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 const FilaPoducto = ({venta, setEjecutarConsulta}) => {
 	const [edit, setEdit] = useState(false);
 
-	const [nuevaVenta, setnuevaVenta] = useState({
-		id_venta: venta.id_venta,
-		vendedor: vendedores._id,
-		id_cliente: venta.id_cliente,
-		nombre_cliente: venta.nombre_cliente,
-		apellido_cliente: venta.apellido_cliente,
-		fecha_venta: venta.fecha_venta,
-		valor_venta: venta.valor_venta,
-		estado: venta.estado,
-	});
+	// const [nuevaVenta, setnuevaVenta] = useState({
+	// 	id_venta: venta.id_venta,
+	// 	vendedor: vendedores._id,
+	// 	id_cliente: venta.id_cliente,
+	// 	nombre_cliente: venta.nombre_cliente,
+	// 	apellido_cliente: venta.apellido_cliente,
+	// 	fecha_venta: venta.fecha_venta,
+	// 	valor_venta: venta.valor_venta,
+	// 	estado: venta.estado,
+	// });
 
 	const actualizarVenta = async () => {
 		// await editarVenta(
@@ -306,7 +306,7 @@ const FilaPoducto = ({venta, setEjecutarConsulta}) => {
 		<tr>
 			<>
 				<td className='spaceTable resultTable text-gray-900 font-medium '>{venta.id_venta}</td>
-				<td className='spaceTable resultTable'>{vendedores._id}</td>
+				<td className='spaceTable resultTable'>{datosVenta.vendedor}</td>
 				<td className='spaceTable resultTable'>{venta.id_cliente}</td>
 				<td className='spaceTable resultTable'>{venta.nombre_cliente}</td>
 				<td className='spaceTable resultTable'>{venta.apellido_cliente}</td>
@@ -365,6 +365,8 @@ const FormularioCreacionVentas = ({setMostrarTabla}) => {
 			cantidad: nuevaVenta.valor,
 			productos: listaProductos,
 		};
+
+
 
 		await crearVenta(
 			datosVenta,

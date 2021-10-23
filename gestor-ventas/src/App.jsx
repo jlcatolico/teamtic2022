@@ -15,7 +15,7 @@ import UsuariosListar from 'pages/UsuariosListar';
 import VentasActualizar from 'pages/VentasActualizar';
 import VentasCrear from 'pages/VentasCrear';
 import Inside from 'pages/Inside';
-import VentasListar from 'pages/VentasListar';
+import Ventas from 'pages/Ventas';
 import Usuarios from 'pages/Usuarios';
 import AcercaDeNosotros from 'pages/AcercaDeNosotros';
 import Marcas from 'pages/Marcas';
@@ -57,7 +57,7 @@ function App() {
 							'/Usuarios',
 							'/VentasActualizar',
 							'/VentasCrear',
-							'/VentasListar',
+							'/Ventas',
 						]}>
 						<PrivateLayout>
 							<Switch>
@@ -88,8 +88,8 @@ function App() {
 								<Route path='/VentasActualizar'>
 									<VentasActualizar />
 								</Route>
-								<Route path='/VentasListar'>
-									<VentasListar />
+								<Route path='/Ventas'>
+									<Ventas />
 								</Route>
 								<Route path='/VentasCrear'>
 									<VentasCrear />

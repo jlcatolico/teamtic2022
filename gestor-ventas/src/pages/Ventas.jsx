@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 import { nanoid } from 'nanoid';
 import { crearVenta } from 'utils/api';
 import { obtenerProductos } from 'utils/api';
@@ -8,21 +8,16 @@ import { obtenerUsuarios } from 'utils/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 const Ventas = () => {
-
 	const form = useRef(null);
 	const [vendedores, setVendedores] = useState([]);
-	const [Productos, setProductos] = useState([]);
+	const [productos, setProductos] = useState([]);
 	const [ProductosTabla, setProductosTabla] = useState([]);
 
 	const [mostrarTabla, setMostrarTabla] = useState(true);
 	const [textoBoton, setTextoBoton] = useState('Crear Venta');
 	const [ventas, setVentas] = useState([]);
 	const [ejecutarConsulta, setEjecutarConsulta] = useState([]);
-
-
 
 	useEffect(() => {
 		const fetchVendores = async () => {
@@ -88,47 +83,56 @@ const Ventas = () => {
 		e.preventDefault();
 		const fd = new FormData(form.current);
 
-		const formData = {};
+		const nuevaVenta = {};
 		fd.forEach((value, key) => {
-			formData[key] = value;
+			nuevaVenta[key] = value;
 		});
 
-		console.log('form data', formData);
+		console.log('form data', nuevaVenta);
 
-		const listaProductos = Object.keys(formData)
+		const listaProductos = Object.keys(nuevaVenta)
 			.map((k) => {
 				if (k.includes('producto')) {
-					return ProductosTabla.filter((v) => v._id === formData[k])[0];
+					return ProductosTabla.filter((v) => v._id === nuevaVenta[k])[0];
 				}
 				return null;
 			})
 			.filter((v) => v);
 
 		const datosVenta = {
-			vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-			cantidad: formData.precio_unitario,
-			Productos: listaProductos,
+			vendedor: vendedores.filter((v) => v._id === nuevaVenta.vendedor)[0],
+			cantidad: nuevaVenta.precio_unitario,
+			productos: listaProductos,
+		};
+		const options = {
+			method: 'POST',
+			url: 'http://localhost:5000/ventas/',
+			headers: { 'Content-Type': 'application/json' },
+			data: datosVenta,
 		};
 
-		await crearVenta(
-			datosVenta,
-			(response) => {
-				console.log(response);
-			},
-			(error) => {
+
+		console.log('option ejecutados');
+
+		await axios.request(options)
+			.then(function (response) {
+				console.log(response.data);
+			})
+			.catch(function (error) {
+				console.log('error');
 				console.error(error);
-			}
-		);
+			});
+		console.log('enviado');
+		toast.success('venta agregado con exito');
 	};
 
 	return (
 		<div>
 			<div className=' w-5/6 flex items-center'>
 				<div className='w-full flex justify-end items-center'>
-					<button
-						onClick={() => {
-							setMostrarTabla(!mostrarTabla);
-						}}
+					<button onClick={() => {
+						setMostrarTabla(!mostrarTabla);
+					}}
 						className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
 						{textoBoton}
 					</button>
@@ -153,31 +157,18 @@ const Ventas = () => {
 						</select>
 					</label>
 
-					<TablaProductos
-						Productos={Productos}
-						setProductos={setProductos}
-						setProductosTabla={setProductosTabla}
-					/>
+					<TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
 
 					<label className='flex flex-col'>
 						<span className='text-2xl font-gray-900'>Valor Total Venta</span>
-						<input
-							className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-							type='number'
-							name='precio_unitario'
-							required
-						/>
+						<input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2' type='number' name='precio_unitario' required />
 					</label>
-					<button
-						type='submit'
-						className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
-					>
+					<button type='submit' className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
 						Crear Venta
 					</button>
 				</form>
 			</div>
 		</div>
-
 	);
 };
 
@@ -554,8 +545,8 @@ const Ventas = () => {
 // 	);
 // };
 
-const TablaProductos = ({ Productos, setProductos, setProductosTabla }) => {
-	const [Productogregar, setProductogregar] = useState({});
+const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
+	const [productoAgregar, setProductoAgregar] = useState({});
 	const [filasTabla, setFilasTabla] = useState([]);
 
 	useEffect(() => {
@@ -563,14 +554,14 @@ const TablaProductos = ({ Productos, setProductos, setProductosTabla }) => {
 	}, [filasTabla, setProductosTabla]);
 
 	const agregarNuevoProducto = () => {
-		setFilasTabla([...filasTabla, Productogregar]);
-		setProductos(Productos.filter((v) => v._id !== Productogregar._id));
-		setProductogregar({});
+		setFilasTabla([...filasTabla, productoAgregar]);
+		setProductos(productos.filter((v) => v._id !== productoAgregar._id));
+		setProductoAgregar({});
 	};
 
 	const eliminarProducto = (ProductoEliminar) => {
 		setFilasTabla(filasTabla.filter((v) => v._id !== ProductoEliminar._id));
-		setProductos([...Productos, ProductoEliminar]);
+		setProductos([...productos, ProductoEliminar]);
 	};
 
 	const modificarProducto = (Producto, cantidad) => {
@@ -589,38 +580,23 @@ const TablaProductos = ({ Productos, setProductos, setProductosTabla }) => {
 		<div>
 			<div className='flex '>
 				<label className='flex flex-col' htmlFor='Producto'>
-					<select
-						className='p-2'
-						value={Productogregar._id ?? ''}
-						onChange={(e) =>
-							setProductogregar(Productos.filter((v) => v._id === e.target.value)[0])
-						}
-					>
+					<select className='p-2' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
 						<option disabled value=''>
 							Seleccione un Producto
 						</option>
-						{Productos.map((el) => {
-							return (
-								<option
-									key={nanoid()}
-									value={el._id}
-								>{`${el.descripcion}`}</option>
-							);
+						{productos.map((el) => {
+							return <option key={nanoid()} value={el._id}>{`${el.descripcion}`}</option>;
 						})}
 					</select>
 				</label>
-				<button
-					type='button'
-					onClick={() => agregarNuevoProducto()}
-					className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'
-				>
+				<button type='button' onClick={() => agregarNuevoProducto()} className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
 					Agregar Producto
 				</button>
 			</div>
 			<table className='tabla'>
 				<thead>
 					<tr>
-						<th>Id Venta</th>
+						<th>Id Producto</th>
 						<th>Descripcion</th>
 						<th>Valor unitario</th>
 						<th>Estado</th>
@@ -632,15 +608,7 @@ const TablaProductos = ({ Productos, setProductos, setProductosTabla }) => {
 				</thead>
 				<tbody>
 					{filasTabla.map((el, index) => {
-						return (
-							<FilaProducto
-								key={el._id}
-								veh={el}
-								index={index}
-								eliminarProducto={eliminarProducto}
-								modificarProducto={modificarProducto}
-							/>
-						);
+						return <FilaProducto key={el._id} veh={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
 					})}
 				</tbody>
 			</table>
@@ -649,44 +617,39 @@ const TablaProductos = ({ Productos, setProductos, setProductosTabla }) => {
 };
 
 const FilaProducto = ({ veh, index, eliminarProducto, modificarProducto }) => {
-	const [Producto, setProducto] = useState(veh);
+	const [producto, setProducto] = useState(veh);
 	useEffect(() => {
-		console.log('veh', Producto);
-	}, [Producto]);
+		console.log('veh', producto);
+	}, [producto]);
 	return (
 		<tr>
-			<td>{Producto.id_producto}</td>
-			<td>{Producto.descripcion}</td>
-			<td>{Producto.precio_unitario}</td>
-			<td>{Producto.estado}</td>
+			<td>{producto.id_producto}</td>
+			<td>{producto.descripcion}</td>
+			<td>{producto.precio_unitario}</td>
+			<td>{producto.estado}</td>
 			<td>
 				<label htmlFor={`precio_unitario_${index}`}>
 					<input
 						type='number'
 						name={`cantidad_${index}`}
-						value={Producto.cantidad}
+						value={producto.cantidad}
 						onChange={(e) => {
-							modificarProducto(Producto, e.target.value === '' ? '0' : e.target.value);
+							modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
 							setProducto({
-								...Producto,
+								...producto,
 								cantidad: e.target.value === '' ? '0' : e.target.value,
-								total:
-									parseFloat(Producto.precio_unitario) *
-									parseFloat(e.target.value === '' ? '0' : e.target.value),
+								total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
 							});
 						}}
 					/>
 				</label>
 			</td>
-			<td>{parseFloat(Producto.total ?? 0)}</td>
+			<td>{parseFloat(producto.total ?? 0)}</td>
 			<td>
-				<i
-					onClick={() => eliminarProducto(Producto)}
-					className='fas fa-minus text-red-500 cursor-pointer'
-				/>
+				<i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
 			</td>
 			<td className='hidden'>
-				<input hidden defaultValue={Producto._id} name={`Producto_${index}`} />
+				<input hidden defaultValue={producto._id} name={`Producto_${index}`} />
 			</td>
 		</tr>
 	);

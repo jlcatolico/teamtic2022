@@ -4,6 +4,8 @@ const getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;
 };
 
+// CRUD DE PRODUCTOS
+
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = {
     method: 'GET',

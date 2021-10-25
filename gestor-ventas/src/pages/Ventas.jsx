@@ -12,7 +12,7 @@ const Ventas = () => {
 	const form = useRef(null);
 	const [vendedores, setVendedores] = useState([]);
 	const [productos, setProductos] = useState([]);
-	const [ProductosTabla, setProductosTabla] = useState([]);
+	const [productosTabla, setProductosTabla] = useState([]);
 
 	const [mostrarTabla, setMostrarTabla] = useState(true);
 	const [textoBoton, setTextoBoton] = useState('Crear Venta');
@@ -45,72 +45,78 @@ const Ventas = () => {
 		fetchProductos();
 	}, []);
 
-	useEffect(() => {
-		const obtenerVentas = async () => {
-			const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
+	// useEffect(() => {
+	// 	const obtenerVentas = async () => {
+	// 		const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
 
-			await axios
-				.request(options)
-				.then(function (response) {
-					setVentas(response.data);
-				})
-				.catch(function (error) {
-					console.error(error);
-				});
-		};
+	// 		await axios
+	// 			.request(options)
+	// 			.then(function (response) {
+	// 				setVentas(response.data);
+	// 			})
+	// 			.catch(function (error) {
+	// 				console.error(error);
+	// 			});
+	// 	};
 
-		if (ejecutarConsulta) {
-			obtenerVentas();
-			setEjecutarConsulta(false);
-		}
-	}, [ejecutarConsulta]);
+	// 	if (ejecutarConsulta) {
+	// 		obtenerVentas();
+	// 		setEjecutarConsulta(false);
+	// 	}
+	// }, [ejecutarConsulta]);
 
-	useEffect(() => {
-		if (mostrarTabla) {
-			setEjecutarConsulta(false);
-		}
-	}, [mostrarTabla]);
+	// useEffect(() => {
+	// 	if (mostrarTabla) {
+	// 		setEjecutarConsulta(false);
+	// 	}
+	// }, [mostrarTabla]);
 
-	useEffect(() => {
-		if (mostrarTabla) {
-			setTextoBoton('+ Crear Venta');
-		} else {
-			setTextoBoton('Mostrar Ventas');
-		}
-	}, [mostrarTabla]);
+	// useEffect(() => {
+	// 	if (mostrarTabla) {
+	// 		setTextoBoton('+ Crear Venta');
+	// 	} else {
+	// 		setTextoBoton('Mostrar Ventas');
+	// 	}
+	// }, [mostrarTabla]);
 
 	const submitForm = async (e) => {
 		e.preventDefault();
 		const fd = new FormData(form.current);
 
-		const nuevaVenta = {};
+		const formData = {};
 		fd.forEach((value, key) => {
-			nuevaVenta[key] = value;
+			formData[key] = value;
 		});
 
-		console.log('form data', nuevaVenta);
+		console.log('form data', formData);
 
-		const listaProductos = Object.keys(nuevaVenta)
+		const listaProductos = Object.keys(formData)
 			.map((k) => {
 				if (k.includes('producto')) {
-					return ProductosTabla.filter((v) => v._id === nuevaVenta[k])[0];
+					return productosTabla.filter((v) => v._id === formData[k])[0];
 				}
 				return null;
 			})
 			.filter((v) => v);
 
+		console.log('lista antes de cantidad', listaProductos);
+
+		console.log('lista después de cantidad', listaProductos);
+
 		const datosVenta = {
-			vendedor: vendedores.filter((v) => v._id === nuevaVenta.vendedor)[0],
-			cantidad: nuevaVenta.precio_unitario,
+			vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+			cantidad: formData.valor_venta,
 			productos: listaProductos,
 		};
+
+		console.log('lista productos', listaProductos);
+
 		const options = {
 			method: 'POST',
 			url: 'http://localhost:5000/ventas/',
 			headers: { 'Content-Type': 'application/json' },
 			data: datosVenta,
 		};
-
 
 		console.log('option ejecutados');
 
@@ -123,7 +129,7 @@ const Ventas = () => {
 				console.error(error);
 			});
 		console.log('enviado');
-		toast.success('venta agregado con exito');
+		toast.success('venta agregada con exito');
 	};
 
 	return (
@@ -142,6 +148,9 @@ const Ventas = () => {
 				{mostrarTabla ? <TablaVentas listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} /> : <FormularioCreacionVentas setMostrarTabla={setMostrarTabla} />}
 				<ToastContainer position='bottom-center' autoClose={2000} />
 			</div> */}
+
+			// Formulario para crear ventas
+
 			<div className='flex h-full w-full items-center justify-center'>
 				<form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
 					<h1 className='text-3xl font-extrabold text-gray-900 my-3'>Crear una nueva venta</h1>
@@ -161,7 +170,7 @@ const Ventas = () => {
 
 					<label className='flex flex-col'>
 						<span className='text-2xl font-gray-900'>Valor Total Venta</span>
-						<input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2' type='number' name='precio_unitario' required />
+						<input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2' type='number' name='valor_venta' value=''/>
 					</label>
 					<button type='submit' className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
 						Crear Venta
@@ -171,7 +180,126 @@ const Ventas = () => {
 		</div>
 	);
 };
+// TablaProductos está correcta, para crear
 
+const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
+	const [productoAgregar, setProductoAgregar] = useState({});
+	const [filasTabla, setFilasTabla] = useState([]);
+
+	useEffect(() => {
+		console.log(productoAgregar);
+	}, [productoAgregar]);
+
+	useEffect(() => {
+		console.log('filasTabla', filasTabla);
+		setProductosTabla(filasTabla);
+	}, [filasTabla, setProductosTabla]);
+
+	const agregarNuevoProducto = () => {
+		setFilasTabla([...filasTabla, productoAgregar]);
+		setProductos(productos.filter((v) => v._id !== productoAgregar._id));
+		setProductoAgregar({});
+	};
+
+	const eliminarProducto = (productoEliminar) => {
+		setFilasTabla(filasTabla.filter((v) => v._id !== productoEliminar._id));
+		setProductos([...productos, productoEliminar]);
+	};
+
+	const modificarProducto = (producto, cantidad) => {
+		setFilasTabla(
+			filasTabla.map((ft) => {
+				if (ft._id === producto.id) {
+					ft.cantidad = cantidad;
+					ft.total = producto.precio_unitario * cantidad;
+				}
+				return ft;
+			})
+		);
+	};
+
+	return (
+		<div>
+			<div className='flex '>
+				<label className='flex flex-col' htmlFor='producto'>
+					<select className='p-2' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
+						<option disabled value=''>
+							Seleccione un Producto
+						</option>
+						{productos.map((el) => {
+							return (<option key={nanoid()} value={el._id}>{`${el.descripcion}`}</option>
+							);
+						})}
+					</select>
+				</label>
+				<button type='button' onClick={() => agregarNuevoProducto()} className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
+					Agregar Producto
+				</button>
+			</div>
+			<table className='tabla'>
+				<thead>
+					<tr>
+						<th>Id Producto</th>
+						<th>Descripcion</th>
+						<th>Valor unitario</th>
+						<th>Estado</th>
+						<th>Unidades</th>
+						<th>Costo</th>
+						<th>Eliminar</th>
+						<th className='hidden'>Input</th>
+					</tr>
+				</thead>
+				<tbody>
+					{filasTabla.map((el, index) => {
+						return <FilaProducto key={el._id} prod={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
+					})}
+				</tbody>
+			</table>
+		</div>
+	);
+};
+
+// Fila producto está correcta, para crear
+
+const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
+	const [producto, setProducto] = useState(prod);
+	useEffect(() => {
+		console.log('prod', producto);
+	}, [producto]);
+	
+	return (
+		<tr>
+			<td>{producto.id_producto}</td>
+			<td>{producto.descripcion}</td>
+			<td>{producto.precio_unitario}</td>
+			<td>{producto.estado}</td>
+			<td>
+				<label htmlFor={`precio_unitario_${index}`}>
+					<input
+						type='number'
+						name={`cantidad_${index}`}
+						value={producto.cantidad}
+						onChange={(e) => {
+							modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
+							setProducto({
+								...producto,
+								cantidad: e.target.value === '' ? '0' : e.target.value,
+								total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
+							});
+						}}
+					/>
+				</label>
+			</td>
+			<td>{parseFloat(producto.total ?? 0)}</td>
+			<td>
+				<i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
+			</td>
+			<td className='hidden'>
+				<input hidden defaultValue={producto._id} name={`Producto_${index}`} />
+			</td>
+		</tr>
+	);
+};
 // const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 // 	const form = useRef(null);
 
@@ -545,114 +673,6 @@ const Ventas = () => {
 // 	);
 // };
 
-const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
-	const [productoAgregar, setProductoAgregar] = useState({});
-	const [filasTabla, setFilasTabla] = useState([]);
 
-	useEffect(() => {
-		setProductosTabla(filasTabla);
-	}, [filasTabla, setProductosTabla]);
-
-	const agregarNuevoProducto = () => {
-		setFilasTabla([...filasTabla, productoAgregar]);
-		setProductos(productos.filter((v) => v._id !== productoAgregar._id));
-		setProductoAgregar({});
-	};
-
-	const eliminarProducto = (ProductoEliminar) => {
-		setFilasTabla(filasTabla.filter((v) => v._id !== ProductoEliminar._id));
-		setProductos([...productos, ProductoEliminar]);
-	};
-
-	const modificarProducto = (Producto, cantidad) => {
-		setFilasTabla(
-			filasTabla.map((ft) => {
-				if (ft._id === Producto.id) {
-					ft.cantidad = cantidad;
-					ft.total = Producto.precio_unitario * cantidad;
-				}
-				return ft;
-			})
-		);
-	};
-
-	return (
-		<div>
-			<div className='flex '>
-				<label className='flex flex-col' htmlFor='Producto'>
-					<select className='p-2' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
-						<option disabled value=''>
-							Seleccione un Producto
-						</option>
-						{productos.map((el) => {
-							return <option key={nanoid()} value={el._id}>{`${el.descripcion}`}</option>;
-						})}
-					</select>
-				</label>
-				<button type='button' onClick={() => agregarNuevoProducto()} className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
-					Agregar Producto
-				</button>
-			</div>
-			<table className='tabla'>
-				<thead>
-					<tr>
-						<th>Id Producto</th>
-						<th>Descripcion</th>
-						<th>Valor unitario</th>
-						<th>Estado</th>
-						<th>Unidades</th>
-						<th>Costo</th>
-						<th>Eliminar</th>
-						<th className='hidden'>Input</th>
-					</tr>
-				</thead>
-				<tbody>
-					{filasTabla.map((el, index) => {
-						return <FilaProducto key={el._id} veh={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
-					})}
-				</tbody>
-			</table>
-		</div>
-	);
-};
-
-const FilaProducto = ({ veh, index, eliminarProducto, modificarProducto }) => {
-	const [producto, setProducto] = useState(veh);
-	useEffect(() => {
-		console.log('veh', producto);
-	}, [producto]);
-	return (
-		<tr>
-			<td>{producto.id_producto}</td>
-			<td>{producto.descripcion}</td>
-			<td>{producto.precio_unitario}</td>
-			<td>{producto.estado}</td>
-			<td>
-				<label htmlFor={`precio_unitario_${index}`}>
-					<input
-						type='number'
-						name={`cantidad_${index}`}
-						value={producto.cantidad}
-						onChange={(e) => {
-							modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
-							setProducto({
-								...producto,
-								cantidad: e.target.value === '' ? '0' : e.target.value,
-								total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
-							});
-						}}
-					/>
-				</label>
-			</td>
-			<td>{parseFloat(producto.total ?? 0)}</td>
-			<td>
-				<i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
-			</td>
-			<td className='hidden'>
-				<input hidden defaultValue={producto._id} name={`Producto_${index}`} />
-			</td>
-		</tr>
-	);
-};
 
 export default Ventas;

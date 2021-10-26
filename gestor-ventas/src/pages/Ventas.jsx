@@ -101,6 +101,13 @@ const Ventas = () => {
 
 		console.log('lista antes de cantidad', listaProductos);
 
+		Object.keys(formData).forEach((k) => {
+			if (k.includes('cantidad')) {
+				const indice = parseInt(k.split('_')[1]);
+				listaProductos[indice]['cantidad'] = formData[k];
+			}
+		});
+
 		console.log('lista después de cantidad', listaProductos);
 
 		const datosVenta = {
@@ -170,7 +177,7 @@ const Ventas = () => {
 
 					<label className='flex flex-col'>
 						<span className='text-2xl font-gray-900'>Valor Total Venta</span>
-						<input className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2' type='number' name='valor_venta' value=''/>
+						{/* puede ser necesario un usefect */}
 					</label>
 					<button type='submit' className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
 						Crear Venta
@@ -251,7 +258,28 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 				</thead>
 				<tbody>
 					{filasTabla.map((el, index) => {
-						return <FilaProducto key={el._id} prod={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
+						// return <FilaProducto key={el._id} prod={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
+						return (
+							<tr key={nanoid()}>
+								<td>{el.id}</td>
+								<td>{el.id_producto}</td>
+								<td>{el.descripcion}</td>
+								<td>{el.precio_unitario}</td>
+								<td>{el.estado}</td>
+								<td>
+									<label htmlFor={`cantidad${index}`}>
+										<input type='number' name={`cantidad_${index}`} />
+									</label>
+								</td>
+								<td>
+									<i
+										onClick={() => eliminarProducto(el)}
+										className='fas fa-minus text-red-500 cursor-pointer'
+									/>
+								</td>
+								<input hidden defaultValue={el._id} name={`producto${index}`} />
+							</tr>
+						);
 					})}
 				</tbody>
 			</table>
@@ -261,45 +289,45 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 
 // Fila producto está correcta, para crear
 
-const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
-	const [producto, setProducto] = useState(prod);
-	useEffect(() => {
-		console.log('prod', producto);
-	}, [producto]);
-	
-	return (
-		<tr>
-			<td>{producto.id_producto}</td>
-			<td>{producto.descripcion}</td>
-			<td>{producto.precio_unitario}</td>
-			<td>{producto.estado}</td>
-			<td>
-				<label htmlFor={`precio_unitario_${index}`}>
-					<input
-						type='number'
-						name={`cantidad_${index}`}
-						value={producto.cantidad}
-						onChange={(e) => {
-							modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
-							setProducto({
-								...producto,
-								cantidad: e.target.value === '' ? '0' : e.target.value,
-								total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
-							});
-						}}
-					/>
-				</label>
-			</td>
-			<td>{parseFloat(producto.total ?? 0)}</td>
-			<td>
-				<i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
-			</td>
-			<td className='hidden'>
-				<input hidden defaultValue={producto._id} name={`Producto_${index}`} />
-			</td>
-		</tr>
-	);
-};
+// const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
+// 	const [producto, setProducto] = useState(prod);
+// 	useEffect(() => {
+// 		console.log('prod', producto);
+// 	}, [producto]);
+
+// 	return (
+// 		<tr>
+// 			<td>{producto.id_producto}</td>
+// 			<td>{producto.descripcion}</td>
+// 			<td>{producto.precio_unitario}</td>
+// 			<td>{producto.estado}</td>
+// 			<td>
+// 				<label htmlFor={`precio_unitario_${index}`}>
+// 					<input
+// 						type='number'
+// 						name={`cantidad_${index}`}
+// 						value={producto.cantidad}
+// 						onChange={(e) => {
+// 							modificarProducto(producto, e.target.value === '' ? '0' : e.target.value);
+// 							setProducto({
+// 								...producto,
+// 								cantidad: e.target.value === '' ? '0' : e.target.value,
+// 								total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
+// 							});
+// 						}}
+// 					/>
+// 				</label>
+// 			</td>
+// 			<td>{parseFloat(producto.total ?? 0)}</td>
+// 			<td>
+// 				<i onClick={() => eliminarProducto(producto)} className='fas fa-minus text-red-500 cursor-pointer' />
+// 			</td>
+// 			<td className='hidden'>
+// 				<input hidden defaultValue={producto._id} name={`Producto_${index}`} />
+// 			</td>
+// 		</tr>
+// 	);
+// };
 // const TablaVentas = ({listaVentas, setEjecutarConsulta}) => {
 // 	const form = useRef(null);
 

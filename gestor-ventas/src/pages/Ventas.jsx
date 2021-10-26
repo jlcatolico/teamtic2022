@@ -156,38 +156,47 @@ const Ventas = () => {
 				<ToastContainer position='bottom-center' autoClose={2000} />
 			</div> */}
 
-			// Formulario para crear ventas
+			<div className='grid justify-items-center'>
+				<div className='my-3'>
+					<h2 className='text-lg font-medium text-gray-600'>Nueva Venta</h2>
+				</div>
+				<div className='my-3'>
+					<form ref={form} onSubmit={submitForm}>
+						<div className='shadow overflow-hidden sm:rounded-md p-3'>
+							<div className='grid grid-cols-1'>
+								<div>
+									<div className=''>
+										<label className='tracking-wide mb-2' htmlFor='vendedor'>Vendedor</label>
+										<select name='vendedor' className='inputTextE text-gray-600' defaultValue='' required>
+											<option disabled value=''>
+												Seleccione un Vendedor
+											</option>
+											{vendedores.map((el) => {
+												return <option key={nanoid()} value={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
+											})}
+										</select>
+									</div>
 
-			<div className='flex h-full w-full items-center justify-center'>
-				<form ref={form} onSubmit={submitForm} className='flex flex-col h-full'>
-					<h1 className='text-3xl font-extrabold text-gray-900 my-3'>Crear una nueva venta</h1>
-					<label className='flex flex-col' htmlFor='vendedor'>
-						<span className='text-2xl font-gray-900'>Vendedor</span>
-						<select name='vendedor' className='p-2' defaultValue='' required>
-							<option disabled value=''>
-								Seleccione un Vendedor
-							</option>
-							{vendedores.map((el) => {
-								return <option key={nanoid()} value={el._id}>{`${el.nombre} ${el.apellido}`}</option>;
-							})}
-						</select>
-					</label>
+									<TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
+									<div className='grid grid-cols-2'>
+										<label className='tracking-wide mb-2'>Valor Total Venta
+											{/* puede ser necesario un usefect */}
+										</label>
+										<label className='inputTextD'>0</label>
+									</div>
+									<button type='submit' className='searchButton bg-green-400 p-2 hover:bg-green-600'>
+										Crear Venta
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
 
-					<TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
-
-					<label className='flex flex-col'>
-						<span className='text-2xl font-gray-900'>Valor Total Venta</span>
-						{/* puede ser necesario un usefect */}
-					</label>
-					<button type='submit' className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
-						Crear Venta
-					</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	);
 };
-// TablaProductos está correcta, para crear
 
 const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 	const [productoAgregar, setProductoAgregar] = useState({});
@@ -227,9 +236,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 
 	return (
 		<div>
-			<div className='flex '>
+			<div className='flex justify align-middle '>
 				<label className='flex flex-col' htmlFor='producto'>
-					<select className='p-2' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
+					<select className='inputTextE text-gray-600' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
 						<option disabled value=''>
 							Seleccione un Producto
 						</option>
@@ -239,21 +248,24 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 						})}
 					</select>
 				</label>
-				<button type='button' onClick={() => agregarNuevoProducto()} className='col-span-2 bg-green-400 p-2 rounded-full shadow-md hover:bg-green-600 text-white'>
-					Agregar Producto
-				</button>
+				<div className='flex items-center'>
+					<button type='button' onClick={() => agregarNuevoProducto()} className='searchButton bg-green-400 p-2 hover:bg-green-600 mx-4'>
+						Agregar Producto
+					</button>
+				</div>
+
 			</div>
 			<table className='tabla'>
 				<thead>
 					<tr>
-						<th>Id Producto</th>
-						<th>Descripcion</th>
-						<th>Valor unitario</th>
-						<th>Estado</th>
-						<th>Unidades</th>
-						<th>Costo</th>
-						<th>Eliminar</th>
-						<th className='hidden'>Input</th>
+						<th className='labelTable'>Id Producto</th>
+						<th className='labelTable'>Descripcion</th>
+						<th className='labelTable'>Valor unitario</th>
+						<th className='labelTable'>Estado</th>
+						<th className='labelTable'>Unidades</th>
+						<th className='labelTable'>Costo</th>
+						<th className='labelTable'>Eliminar</th>
+						<th className='labelTable hidden'>Input</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -261,17 +273,35 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 						// return <FilaProducto key={el._id} prod={el} index={index} eliminarProducto={eliminarProducto} modificarProducto={modificarProducto} />;
 						return (
 							<tr key={nanoid()}>
-								<td>{el.id}</td>
-								<td>{el.id_producto}</td>
-								<td>{el.descripcion}</td>
-								<td>{el.precio_unitario}</td>
-								<td>{el.estado}</td>
-								<td>
+								<td className='spaceTable resultTable'>{el.id_producto}</td>
+								<td className='spaceTable resultTable'>{el.descripcion}</td>
+								<td className='spaceTable resultTable text-right'>{el.precio_unitario}</td>
+								<td className='spaceTable resultTable'>{el.estado}</td>
+								<td className='spaceTable resultTable'>
 									<label htmlFor={`cantidad${index}`}>
-										<input type='number' name={`cantidad_${index}`} />
+										<input type='number' name={`cantidad_${index}`} className='spacetable inputTextE w-20' />
 									</label>
 								</td>
-								<td>
+								<td className='spaceTable resultTable'>Valor final
+								</td>
+								{/* <td>
+									<label htmlFor={`precio_unitario_${index}`}>
+										<input
+											type='number'
+											name={`total_${index}`}
+											value={el.cantidad}
+											onChange={(e) => {
+												modificarProducto(el, e.target.value === '' ? '0' : e.target.value);
+												setProducto({
+													...producto,
+													cantidad: e.target.value === '' ? '0' : e.target.value,
+													total: parseFloat(producto.precio_unitario) * parseFloat(e.target.value === '' ? '0' : e.target.value),
+												});
+											}}
+										/>
+									</label>
+								</td> */}
+								<td className='spaceTable resultTable text-center'>
 									<i
 										onClick={() => eliminarProducto(el)}
 										className='fas fa-minus text-red-500 cursor-pointer'

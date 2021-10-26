@@ -15,7 +15,7 @@
 }
 
 .labelTable {
-	@apply px-6 py-3 text-left font-medium text-gray-500 tracking-wider;
+	@apply px-3 py-2 text-left font-medium text-gray-500 tracking-wider;
 }
 
 .resultTable {
@@ -23,7 +23,7 @@
 }
 
 .spaceTable {
-	@apply px-6 py-4 whitespace-nowrap;
+	@apply px-3 py-2 whitespace-nowrap;
 }
 
 .actualizarText {

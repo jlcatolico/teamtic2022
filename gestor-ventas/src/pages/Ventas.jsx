@@ -71,13 +71,13 @@ const Ventas = () => {
 	// 	}
 	// }, [mostrarTabla]);
 
-	// useEffect(() => {
-	// 	if (mostrarTabla) {
-	// 		setTextoBoton('+ Crear Venta');
-	// 	} else {
-	// 		setTextoBoton('Mostrar Ventas');
-	// 	}
-	// }, [mostrarTabla]);
+	useEffect(() => {
+		if (mostrarTabla) {
+			setTextoBoton('+ Crear Venta');
+		} else {
+			setTextoBoton('Mostrar Ventas');
+		}
+	}, [mostrarTabla]);
 
 	const submitForm = async (e) => {
 		e.preventDefault();
@@ -140,15 +140,20 @@ const Ventas = () => {
 	};
 
 	return (
-		<div>
-			<div className=' w-5/6 flex items-center'>
-				<div className='w-full flex justify-end items-center'>
-					<button onClick={() => {
-						setMostrarTabla(!mostrarTabla);
-					}}
-						className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
-						{textoBoton}
-					</button>
+		<div className='w-11/12'>
+			<div className='flex justify-evenly'>
+				<div className=' my-4 p-2 w-4/6'>
+					<span className='p-2 w-full text-2xl'>Administracion de Ventas</span>
+				</div>
+				<div className=' w-2/6 flex items-center'>
+					<div className='w-full flex justify-end items-center'>
+						<button onClick={() => {
+							setMostrarTabla(!mostrarTabla);
+						}}
+							className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
+							{textoBoton}
+						</button>
+					</div>
 				</div>
 			</div>
 			{/* <div>
@@ -165,7 +170,13 @@ const Ventas = () => {
 						<div className='shadow overflow-hidden sm:rounded-md p-3'>
 							<div className='grid grid-cols-1'>
 								<div>
-									<div className=''>
+									<div className='grid grid-cols-2 items-center'>
+										<label className='tracking-wide mb-2'>Fecha
+											{/* puede ser necesario un usefect */}
+										</label>
+										<input type='date' name='fecha' className='inputTextE text-gray-600' />
+									</div>
+									<div className='grid grid-cols-2 items-center'>
 										<label className='tracking-wide mb-2' htmlFor='vendedor'>Vendedor</label>
 										<select name='vendedor' className='inputTextE text-gray-600' defaultValue='' required>
 											<option disabled value=''>
@@ -178,13 +189,23 @@ const Ventas = () => {
 									</div>
 
 									<TablaProductos productos={productos} setProductos={setProductos} setProductosTabla={setProductosTabla} />
-									<div className='grid grid-cols-2'>
+									<div className='grid grid-cols-2 items-center'>
 										<label className='tracking-wide mb-2'>Valor Total Venta
 											{/* puede ser necesario un usefect */}
 										</label>
-										<label className='inputTextD'>0</label>
+										<label className='inputTextD text-gray-600 text-right' name='totalVenta'>0</label>
 									</div>
-									<button type='submit' className='searchButton bg-green-400 p-2 hover:bg-green-600'>
+									<div className='grid grid-cols-2 items-center'>
+										<label className='tracking-wide mb-2'>Estado
+										</label>
+										<select name='estado' className='inputTextE text-gray-600'>
+											<option disabled value=''>Seleccione un Estado</option>
+											<option>En progreso</option>
+											<option>Completada</option>
+											<option>Cancelada</option>
+										</select>
+									</div>
+									<button type='submit' className='searchButton bg-green-400 p-2 hover:bg-green-600 justify-items-center'>
 										Crear Venta
 									</button>
 								</div>
@@ -236,7 +257,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 
 	return (
 		<div>
-			<div className='flex justify align-middle '>
+			<div className='flex justify align-middle my-1'>
 				<label className='flex flex-col' htmlFor='producto'>
 					<select className='inputTextE text-gray-600' value={productoAgregar._id ?? ''} onChange={(e) => setProductoAgregar(productos.filter((v) => v._id === e.target.value)[0])}>
 						<option disabled value=''>
@@ -255,8 +276,8 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 				</div>
 
 			</div>
-			<table className='tabla'>
-				<thead>
+			<table className='min-w-full divide-y divide-gray-200'>
+				<thead className='bg-gray-50'>
 					<tr>
 						<th className='labelTable'>Id Producto</th>
 						<th className='labelTable'>Descripcion</th>
@@ -371,20 +392,18 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 						<h1>Búsqueda</h1>
 // 						<form>
 // 							<div className='my-6 row flex flex-row justify-evenly items-center'>
-// 								<label htmlFor='correo' className='labelSearch'>
+// 								<label htmlFor='id.venta' className='labelSearch'>
 // 									ID venta
 // 								</label>
-// 								<input type='email' name='correo' id='correo' autoComplete='correo' className='inputSearch' />
-// 								<label htmlFor='rol' className='labelSearch'>
-// 									Valor
+// 								<input type='email' name='id.venta' id='id.venta' autoComplete='id.venta' className='inputSearch' />
+// 								<label htmlFor='nombreVendedor' className='labelSearch'>
+// 									Nombre Vendedor
 // 								</label>
-// 								<select id='rol' name='rol' autoComplete='rol' className='inputSearch'>
-// 									<option disabled value={0}>
-// 										Seleccionar
-// 									</option>
-// 									<option>Administrador</option>
-// 									<option>Vendedor</option>
-// 								</select>
+// 								<input type='text' name='nombreVendedor' id='nombreVendedor' autoComplete='nombreVendedor' className='inputSearch' />
+//								<label htmlFor='apellidoVendedor' className='labelSearch'>
+// 									Apellido Vendedor
+// 								</label>
+// 								<input type='text' name='apellidoVendedor' id='apellidoVendedor' autoComplete='apellidoVendedor' className='inputSearch' />
 // 								<label htmlFor='estado' className='labelSearch'>
 // 									Estado
 // 								</label>

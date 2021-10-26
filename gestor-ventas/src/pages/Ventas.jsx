@@ -112,8 +112,11 @@ const Ventas = () => {
 
 		const datosVenta = {
 			vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
+			fecha: formData.fecha,
 			cantidad: formData.valor_venta,
 			productos: listaProductos,
+			totalVenta: formData.totalVenta,
+			estado: formData.estado,
 		};
 
 		console.log('lista productos', listaProductos);
@@ -171,8 +174,8 @@ const Ventas = () => {
 							<div className='grid grid-cols-1'>
 								<div>
 									<div className='grid grid-cols-2 items-center'>
-										<label className='tracking-wide mb-2'>Fecha
-											{/* puede ser necesario un usefect */}
+										<label className='tracking-wide mb-2'>
+											Fecha
 										</label>
 										<input type='date' name='fecha' className='inputTextE text-gray-600' />
 									</div>
@@ -338,6 +341,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 	);
 };
 
+
+
+
 // Fila producto está correcta, para crear
 
 // const FilaProducto = ({ prod, index, eliminarProducto, modificarProducto }) => {
@@ -424,22 +430,19 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 								<thead className='bg-gray-50'>
 // 									<tr>
 // 										<th scope='col' className='labelTable'>
-// 											Identificación
+// 											Fecha
 // 										</th>
 // 										<th scope='col' className='labelTable'>
-// 											Nombre
+// 											Vendedor
 // 										</th>
 // 										<th scope='col' className='labelTable'>
-// 											Apellido
+// 											Cliente
 // 										</th>
 // 										<th scope='col' className='labelTable'>
-// 											Correo
+// 											Valor
 // 										</th>
 // 										<th scope='col' className='labelTable'>
 // 											Estado
-// 										</th>
-// 										<th scope='col' className='labelTable'>
-// 											Rol
 // 										</th>
 // 										<th scope='col' className='labelTable'>
 // 											Acciones
@@ -447,8 +450,8 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 									</tr>
 // 								</thead>
 // 								<tbody className='bg-white divide-y divide-gray-200'>
-// 									{listaUsuarios.map((usuario) => (
-// 										<FilaUsuarios key={nanoid()} usuario={usuario} setEjecutarConsulta={setEjecutarConsulta} />
+// 									{listaVentas.map((venta) => (
+// 										<FilaVentas key={nanoid()} venta={venta} setEjecutarConsulta={setEjecutarConsulta} />
 // 									))}
 // 								</tbody>
 // 							</table>
@@ -500,58 +503,58 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 	);
 // };
 
-// const FilaUsuarios = ({Ventas, setEjecutarConsulta}) => {
+// const FilaVentas = ({Ventas, setEjecutarConsulta}) => {
 // 	const [edit, setEdit] = useState(false);
 
-// 	const [nuevoUsuario, setnuevoUsuario] = useState({
-// 		identificacion: usuario.identificacion,
-// 		nombre: usuario.nombre,
-// 		apellido: usuario.apellido,
-// 		correo: usuario.correo,
-// 		estado: usuario.estado,
-// 		rol: usuario.rol,
+// 	const [nuevoVenta, setnuevoVenta] = useState({
+// 		identificacion: venta.identificacion,
+// 		nombre: venta.nombre,
+// 		apellido: venta.apellido,
+// 		correo: venta.correo,
+// 		estado: venta.estado,
+// 		rol: venta.rol,
 // 	});
 
-// 	const actualizarUsuario = async () => {
-// 		console.log(nuevoUsuario);
+// 	const actualizarVenta = async () => {
+// 		console.log(nuevoVenta);
 
 // 		const options = {
 // 			method: 'PATCH',
-// 			url: `http://localhost:5000/usuarios/${usuario._id}`,
+// 			url: `http://localhost:5000/ventas/${venta._id}`,
 // 			headers: {'Content-Type': 'application/json'},
-// 			data: {...nuevoUsuario},
+// 			data: {...nuevoVenta},
 // 		};
 
 // 		await axios
 // 			.request(options)
 // 			.then(function (response) {
 // 				console.log(response.data);
-// 				toast.success('Usuario Moficado con exito');
+// 				toast.success('Venta Moficado con exito');
 // 				setEjecutarConsulta(true);
 // 				setEdit(false);
 // 			})
 // 			.catch(function (error) {
 // 				console.error(error);
-// 				toast.error('El usuario no se pudo modificar');
+// 				toast.error('El venta no se pudo modificar');
 // 			});
 // 	};
 
-// 	const eliminarUsuario = async () => {
+// 	const eliminarVenta = async () => {
 // 		const options = {
 // 			method: 'DELETE',
-// 			url: `http://localhost:5000/usuarios/${usuario._id}`,
+// 			url: `http://localhost:5000/ventas/${venta._id}`,
 // 		};
 
 // 		axios
 // 			.request(options)
 // 			.then(function (response) {
 // 				console.log(response.data);
-// 				toast.success('Usuario Eliminado con exito');
+// 				toast.success('Venta Eliminado con exito');
 // 				setEjecutarConsulta(true);
 // 			})
 // 			.catch(function (error) {
 // 				console.error(error);
-// 				toast.error('El usuario no se pudo eliminar');
+// 				toast.error('El venta no se pudo eliminar');
 // 			});
 // 	};
 
@@ -562,26 +565,26 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 					<td className='p-4'>
 // 						<input
 // 							type='number'
-// 							value={nuevoUsuario.identificacion}
+// 							value={nuevoVenta.identificacion}
 // 							className='inputSearch'
-// 							onChange={(e) => setnuevoUsuario({...nuevoUsuario, identificacion: e.target.value})}></input>
+// 							onChange={(e) => setnuevoVenta({...nuevoVenta, identificacion: e.target.value})}></input>
 // 					</td>
 // 					<td className='p-4'>
-// 						<input type='text' value={nuevoUsuario.nombre} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, nombre: e.target.value})}></input>
+// 						<input type='text' value={nuevoVenta.nombre} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, nombre: e.target.value})}></input>
 // 					</td>
 // 					<td className='p-4'>
-// 						<input type='text' value={nuevoUsuario.apellido} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, apellido: e.target.value})}></input>
+// 						<input type='text' value={nuevoVenta.apellido} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, apellido: e.target.value})}></input>
 // 					</td>
 // 					<td className='p-4'>
-// 						<input type='email' value={nuevoUsuario.correo} className='listado' onChange={(e) => setnuevoUsuario({...nuevoUsuario, correo: e.target.value})}></input>
+// 						<input type='email' value={nuevoVenta.correo} className='listado' onChange={(e) => setnuevoVenta({...nuevoVenta, correo: e.target.value})}></input>
 // 					</td>
 // 					<td className='p-4'>
 // 						<select
 // 							id='estado'
-// 							value={nuevoUsuario.estado}
+// 							value={nuevoVenta.estado}
 // 							name='estado'
 // 							className='listado'
-// 							onChange={(e) => setnuevoUsuario({...nuevoUsuario, estado: e.target.value})}
+// 							onChange={(e) => setnuevoVenta({...nuevoVenta, estado: e.target.value})}
 // 							required //revisar, creo que no es necesario
 // 							defaultValue={0}>
 // 							<option disabled value={0}>
@@ -595,10 +598,10 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 					<td className='p-4'>
 // 						<select
 // 							id='estado'
-// 							value={nuevoUsuario.rol}
+// 							value={nuevoVenta.rol}
 // 							name='rol'
 // 							className='listado'
-// 							onChange={(e) => setnuevoUsuario({...nuevoUsuario, rol: e.target.value})}
+// 							onChange={(e) => setnuevoVenta({...nuevoVenta, rol: e.target.value})}
 // 							required
 // 							defaultValue={0}>
 // 							<option disabled value={0}>
@@ -611,54 +614,54 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 				</>
 // 			) : (
 // 				<>
-// 					<td className='spaceTable resultTable text-gray-900 font-medium '>{usuario.identificacion}</td>
-// 					<td className='spaceTable resultTable'>{usuario.nombre}</td>
-// 					<td className='spaceTable resultTable'>{usuario.apellido}</td>
-// 					<td className='spaceTable resultTable'>{usuario.correo}</td>
-// 					<td className='spaceTable resultTable'>{usuario.estado}</td>
-// 					<td className='spaceTable resultTable'>{usuario.rol}</td>
+// 					<td className='spaceTable resultTable text-gray-900 font-medium '>{venta.identificacion}</td>
+// 					<td className='spaceTable resultTable'>{venta.nombre}</td>
+// 					<td className='spaceTable resultTable'>{venta.apellido}</td>
+// 					<td className='spaceTable resultTable'>{venta.correo}</td>
+// 					<td className='spaceTable resultTable'>{venta.estado}</td>
+// 					<td className='spaceTable resultTable'>{venta.rol}</td>
 // 				</>
 // 			)}
 
 // 			<td className='resultTable spaceTable font-medium'>
 // 				<div className='flex w-full justify-around'>
 // 					{edit ? (
-// 						<i onClick={() => actualizarUsuario()} className='fas fa-check text-green-600 hover:text-green-300' />
+// 						<i onClick={() => actualizarVenta()} className='fas fa-check text-green-600 hover:text-green-300' />
 // 					) : (
 // 						<i onClick={() => setEdit(!edit)} className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
 // 					)}
 
-// 					<i onClick={() => eliminarUsuario()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
+// 					<i onClick={() => eliminarVenta()} className='fas fa-trash text-red-600 hover:text-red-300'></i>
 // 				</div>
 // 			</td>
 // 		</tr>
 // 	);
 // };
 
-// const FormularioCreacionUsuarios = ({setMostrarTabla}) => {
+// const FormularioCreacionVentas = ({setMostrarTabla}) => {
 // 	const form = useRef(null);
 
 // 	const sumitForm = async (e) => {
 // 		e.preventDefault();
 // 		const fd = new FormData(form.current);
-// 		const nuevoUsuario = {};
+// 		const nuevoVenta = {};
 
 // 		fd.forEach((value, key) => {
-// 			nuevoUsuario[key] = value;
+// 			nuevoVenta[key] = value;
 // 		});
 
-// 		console.log(nuevoUsuario);
+// 		console.log(nuevoVenta);
 // 		const options = {
 // 			method: 'POST',
-// 			url: 'http://localhost:5000/usuarios/',
+// 			url: 'http://localhost:5000/ventas/',
 // 			headers: {'Content-Type': 'application/json'},
 // 			data: {
-// 				identificacion: nuevoUsuario.identificacion,
-// 				nombre: nuevoUsuario.nombre,
-// 				apellido: nuevoUsuario.apellido,
-// 				correo: nuevoUsuario.correo,
-// 				estado: nuevoUsuario.estado,
-// 				rol: nuevoUsuario.rol,
+// 				identificacion: nuevoVenta.identificacion,
+// 				nombre: nuevoVenta.nombre,
+// 				apellido: nuevoVenta.apellido,
+// 				correo: nuevoVenta.correo,
+// 				estado: nuevoVenta.estado,
+// 				rol: nuevoVenta.rol,
 // 			},
 // 		};
 
@@ -674,14 +677,14 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 // 			});
 
 // 		console.log('enviado');
-// 		toast.success('Usuario agregado con exito');
+// 		toast.success('Venta agregado con exito');
 // 		setMostrarTabla(true);
 // 	};
 
 // 	return (
 // 		<div className='grid justify-items-center'>
 // 			<div className='my-3'>
-// 				<h2 className='text-lg font-medium text-gray-600'>Nuevo Usuario</h2>
+// 				<h2 className='text-lg font-medium text-gray-600'>Nuevo Venta</h2>
 // 			</div>
 // 			<div className='my-3'>
 // 				<form ref={form} onSubmit={sumitForm}>

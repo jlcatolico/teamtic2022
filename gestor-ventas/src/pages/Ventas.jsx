@@ -226,6 +226,8 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 	const [productoAgregar, setProductoAgregar] = useState({});
 	const [filasTabla, setFilasTabla] = useState([]);
 
+	//hola, esto es un commit
+
 	useEffect(() => {
 		console.log(productoAgregar);
 	}, [productoAgregar]);

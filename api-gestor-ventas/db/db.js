@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient} from "mongodb";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });
@@ -15,7 +15,7 @@ let conexion;
 const conectarDB = (callback) => {
   client.connect((err, db) => {
     if (err) {
-      console.error("Error en la conexion a la base de datos");
+      console.error("error: ",err);
     }
     conexion = db.db("gestorventas");
     console.log("Conexion a BD existosa");

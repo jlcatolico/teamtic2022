@@ -11,8 +11,6 @@ const VentasListado = () => {
 
 	const form = useRef(null);
 
-
-
 	const obtenerVentas = async () => {
 		const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
 
@@ -60,7 +58,7 @@ const VentasListado = () => {
 					<div className='w-full flex justify-end items-center'>
 						<button className='text-white bg-green-500 p-2 rounded-lg hover:bg-green-600 mx-4 '>
 							<Link to='/Ventas'>
-							+ Crear Venta
+								+ Crear Venta
 							</Link>
 						</button>
 					</div>
@@ -77,7 +75,7 @@ const VentasListado = () => {
 										Fecha Venta
 									</label>
 									<input type='date' name='fecha' id='fecha' autoComplete='fecha' className='inputSearch' />
-									
+
 									<label htmlFor='vendedor' className='labelSearch'>
 										Vendedor
 									</label>
@@ -122,24 +120,24 @@ const VentasListado = () => {
 										</tr>
 									</thead>
 									<tbody className='bg-white divide-y divide-gray-200'>
-											{ventas.map((venta) => (
-												<tr key={nanoid()}>
+										{ventas.map((venta) => (
+											<tr key={nanoid()}>
 
-													<td className='spaceTable resultTable text-gray-900 font-medium '>{venta._id.substring(0,10)}</td>
-													<td className='spaceTable resultTable'>{venta.fecha}</td>
-													<td className='spaceTable resultTable'>{venta.vendedor.nombre} {venta.vendedor.apellido}</td>
-													<td className='spaceTable resultTable'>{venta.totalVenta}</td>
-													<td className='spaceTable resultTable'>{venta.estado}</td>
-													<td className='resultTable spaceTable font-medium'>
-														<div className='flex w-full justify-around'>
-															<i className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
-															<i onClick={() => eliminarVenta(venta._id)} className='fas fa-trash text-red-600 hover:text-red-300'></i>
-														</div>
-													</td>
-												</tr>
-											)
-											)}
-										</tbody>
+												<td className='spaceTable resultTable text-gray-900 font-medium '>{venta._id.substring(0, 10)}</td>
+												<td className='spaceTable resultTable'>{venta.fecha}</td>
+												<td className='spaceTable resultTable'>{venta.vendedor.nombre} {venta.vendedor.apellido}</td>
+												<td className='spaceTable resultTable'>{venta.totalVenta}</td>
+												<td className='spaceTable resultTable'>{venta.estado}</td>
+												<td className='resultTable spaceTable font-medium'>
+													<div className='flex w-full justify-around'>
+														<i className='fas fa-pencil-alt text-yellow-600 hover:text-yellow-300' />
+														<i onClick={() => eliminarVenta(venta._id)} className='fas fa-trash text-red-600 hover:text-red-300'></i>
+													</div>
+												</td>
+											</tr>
+										)
+										)}
+									</tbody>
 								</table>
 							</form>
 						</div>

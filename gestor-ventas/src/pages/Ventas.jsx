@@ -16,8 +16,8 @@ const Ventas = () => {
 	const params = useParams();
 	const history = useHistory();
 	const [multi, setMulti] = useState([]);
-
-	const [ventas, setVentas] = useState([]);
+	const initialState = { _id: '', vendedor: [], fecha: '', producto: [], totalVenta: '', estado: '', filasTabla: '' };
+	const [ventas, setVentas] = useState([initialState]);
 
 	useEffect(() => {
 		const fetchVendedores = async () => {
@@ -45,40 +45,38 @@ const Ventas = () => {
 		fetchProductos();
 	}, []);
 
-	// useEffect(() => {
-	// 	const obtenerVentas = async () => {
-	// 		const options = { method: 'GET', url: 'http://localhost:5000/ventas/' };
+	const obtenerVenta = async (venta) => {
+		const options = { method: 'GET', url: `http://localhost:5000/${venta._id}` };
 
-	// 		await axios
-	// 			.request(options)
-	// 			.then(function (response) {
-	// 				setVentas(response.data);
-	// 			})
-	// 			.catch(function (error) {
-	// 				console.error(error);
-	// 			});
-	// 	};
+		await axios
+			.request(options)
+			.then(function (response) {
+				setVentas(response.data);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
+	};
 
-	// 	if (ejecutarConsulta) {
-	// 		obtenerVentas();
-	// 		setEjecutarConsulta(false);
-	// 	}
-	// }, [ejecutarConsulta]);
+	useEffect(() => {
+		if (params.id){
+			obtenerVenta(params.id)
+		}
 
-	// useEffect(() => {
-	// 	if (mostrarTabla) {
-	// 		setEjecutarConsulta(false);
-	// 	}
-	// }, [mostrarTabla]);
-
+	}, []);
 
 	const submitForm = async (e) => {
 		e.preventDefault();
+		let res;
+		if(!params.id){res=await options}
 		const fd = new FormData(form.current);
+
+
 
 		const formData = {};
 		fd.forEach((value, key) => {
 			formData[key] = value;
+		
 		});
 
 		console.log('form data', formData);
@@ -172,14 +170,14 @@ const Ventas = () => {
 		);
 	};
 
-	// useEffect(()=>{
-	// 	var suma=0;
-	// 	for (let i of filasTabla){
-	// 	 suma =(suma + (i.producto.precio_unitario * i.cantidad));
-	// 	}
-	// 	setMulti(parseInt(suma));
-	// 	// eslint-disable-next-line
-	//   },[filasTabla]);
+	useEffect(() => {
+		var suma = 0;
+		for (let index of filasTabla) {
+			suma = (suma + (index.precio_unitario * index.cantidad));
+		}
+		setMulti(parseInt(suma));
+		// eslint-disable-next-line
+	}, [filasTabla]);
 
 	return (
 		<div className='w-11/12'>
@@ -219,7 +217,7 @@ const Ventas = () => {
 												Seleccione un Vendedor
 											</option>
 											{vendedores.map((vend) => {
-												return (<option key={nanoid()} onChange={(a)=> setVendedores(vendedores.filter((v)=>v._id === a.target.value)[0])} value={vend._id}>{`${vend.nombre} ${vend.apellido}`}</option>);
+												return (<option key={nanoid()} onChange={(a) => setVendedores(vendedores.filter((v) => v._id === a.target.value)[0])} value={vend._id}>{`${vend.nombre} ${vend.apellido}`}</option>);
 											})}
 										</select>
 									</div>
@@ -237,6 +235,9 @@ const Ventas = () => {
 													})}
 												</select>
 											</label>
+											<input type='number' className='inputTextE text-gray-600 flex flex-col' htmlFor='cantidad'>
+
+											</input>
 											<div className='flex items-center'>
 												<button type='button' onClick={() => agregarNuevoProducto()} className='searchButton bg-green-400 p-2 hover:bg-green-600 mx-4'>
 													Agregar Producto
@@ -271,7 +272,7 @@ const Ventas = () => {
 																	<input type='number' name={`cantidad_${index}`} className='spacetable inputTextE w-20' />
 																</label>
 															</td>
-															<td className='spaceTable resultTable'>Valor final
+															<td className='spaceTable resultTable'>{multi}
 															</td>
 															<td className='spaceTable resultTable text-center'>
 																<i

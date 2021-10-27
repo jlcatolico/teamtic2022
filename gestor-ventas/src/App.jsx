@@ -16,6 +16,7 @@ import VentasActualizar from 'pages/VentasActualizar';
 import VentasCrear from 'pages/VentasCrear';
 import Inside from 'pages/Inside';
 import Ventas from 'pages/Ventas';
+import VentasListado from 'pages/VentasListado';
 import Usuarios from 'pages/Usuarios';
 import AcercaDeNosotros from 'pages/AcercaDeNosotros';
 import Marcas from 'pages/Marcas';
@@ -23,6 +24,7 @@ import Edades from 'pages/Edades';
 import Categorias from 'pages/Categorias';
 import ServicioAlCliente from 'pages/ServicioAlCliente';
 import { Auth0Provider } from "@auth0/auth0-react";
+import VentasFinal from 'pages/VentasFinal';
 
 function App() {
 	return (
@@ -58,6 +60,9 @@ function App() {
 							'/VentasActualizar',
 							'/VentasCrear',
 							'/Ventas',
+							'/VentasListado',
+							'/VentasFinal',
+							
 						]}>
 						<PrivateLayout>
 							<Switch>
@@ -67,7 +72,7 @@ function App() {
 								<Route path='/Productos'>
 									<Productos />
 								</Route>
-								<Route path='/ProductosActualizar'>
+								{/* <Route path='/ProductosActualizar'>
 									<ProductosActualizar />
 								</Route>
 								<Route path='/ProductosCrear'>
@@ -81,19 +86,25 @@ function App() {
 								</Route>
 								<Route path='/UsuariosListar'>
 									<UsuariosListar />
-								</Route>
+								</Route> */}
 								<Route path='/Usuarios'>
 									<Usuarios />
 								</Route>
 								<Route path='/VentasActualizar'>
 									<VentasActualizar />
 								</Route>
+								<Route path='/VentasListado'>
+									<VentasListado />
+								</Route>
 								<Route path='/Ventas'>
 									<Ventas />
 								</Route>
-								<Route path='/VentasCrear'>
-									<VentasCrear />
+								<Route path='/VentasFinal'>
+									<VentasFinal/>
 								</Route>
+								{/* <Route path='/VentasCrear'>
+									<VentasCrear />
+								</Route> */}
 							</Switch>
 						</PrivateLayout>
 					</Route>

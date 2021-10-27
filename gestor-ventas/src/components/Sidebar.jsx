@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from 'Media/IconoToys.png';
 import useActiveRoute from 'hooks/useActiveRoute';
 
@@ -12,14 +12,17 @@ const Sidebar = () => {
 			<ul className='flex flex-col'>
 				<BotonSideBar nombre='Home' ruta='/Inside' icono='fas fa-home' />
 				<BotonSideBar nombre='Productos' ruta='/Productos' icono='fas fa-gifts' />
+				<BotonSideBar nombre='VentasListado' ruta='/VentasListado' icono='far fa-list-alt' />
+
 				<BotonSideBar nombre='Ventas' ruta='/Ventas' icono='far fa-list-alt' />
+				<BotonSideBar nombre='VentasFinal' ruta='/VentasFinal' icono='far fa-list-alt' />
 				<BotonSideBar nombre='Usuarios' ruta='/Usuarios' icono='fas fa-users' />
 			</ul>
 		</nav>
 	);
 };
 
-const BotonSideBar = ({nombre, ruta, icono}) => {
+const BotonSideBar = ({ nombre, ruta, icono }) => {
 	const isActive = useActiveRoute(ruta);
 	return (
 		<Link to={ruta}>
